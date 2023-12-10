@@ -1,5 +1,5 @@
 
-# DevPoli Challenge Project (Onboarding)
+# DevPoli Challenge Project (Holerite)
 
 In this project, we created a Holerite, this project we use MVVM, Delegates and more.
 
