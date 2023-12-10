@@ -10,8 +10,8 @@ This project is a challenge from the [DevPoli](https://www.devpoli.com/challenge
 ## Images from Project
 
 <div align="center">
-    <img width="500px" title="titulo da imagem" src="https://uploaddeimagens.com.br/imagens/q4Uwz9k/>
-  <img width="500px" title="titulo da imagem" src="https://uploaddeimagens.com.br/imagens/4diPwMI"/>
+    <img width="500px" title="titulo da imagem" src="https://uploaddeimagens.com.br/images/004/687/164/full/Simulator_Screenshot_-_iPhone_15_Pro_-_2023-12-10_at_11.38.54.png?1702219158>
+  <img width="500px" title="titulo da imagem" src="https://uploaddeimagens.com.br/images/004/687/165/full/Simulator_Screenshot_-_iPhone_15_Pro_-_2023-12-10_at_11.39.00.png?1702219232"/>
 <div>
 
 
