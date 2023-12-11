@@ -11,24 +11,17 @@ import UIKit
 class ResultViewController: UIViewController {
     
     let resultView = ResultView()
-    var salary: String?
-    var discounts: String?
-    var inss: String?
-    var irrf: String?
-    var netSalary: String?
-    var inssPercentege: String?
-    var irrfPercentege: String?
+    
+    var resultStringModel = ResultStringModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         resultView.delegate = self
-        resultView.viewGrossSalary.setValue(salary!)
-        resultView.viewDiscounts.setValueDiscounts(discounts!)
-        resultView.viewINSSDiscounts.setValueDiscounts(inss!, inssPercentege!)
-        resultView.viewIRRFDiscounts.setValueDiscounts(irrf!, irrfPercentege!)
-        resultView.viewNetSalary.setValue(netSalary!)
-
-       
+        resultView.viewGrossSalary.setValue(resultStringModel.salary)
+        resultView.viewDiscounts.setValueDiscounts(resultStringModel.discount)
+        resultView.viewINSSDiscounts.setValueDiscounts(resultStringModel.inssValue, resultStringModel.inssPercentage)
+        resultView.viewIRRFDiscounts.setValueDiscounts(resultStringModel.irrfValue, resultStringModel.irrfPercentage)
+        resultView.viewNetSalary.setValue(resultStringModel.netSalary)
     }
     
     override func loadView() {

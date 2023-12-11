@@ -36,15 +36,15 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: HomeViewModelDelegate {
-    func goToResult(_ salary: String, _ inss: String, _ irrf: String, _ netSalary: String, _ discounts: String, _ inssPercentege: String, _ irrfPercentege: String) {
+    func goToResult(_ salary: String, _ inss: String, _ irrf: String, _ netSalary: String, _ discounts: String, _ inssPercentage: String, _ irrfPercentage: String) {
         let vc = ResultViewController()
-        vc.salary = salary
-        vc.discounts = discounts
-        vc.inss = inss
-        vc.irrf = irrf
-        vc.netSalary = netSalary
-        vc.inssPercentege = inssPercentege
-        vc.irrfPercentege = irrfPercentege
+        vc.resultStringModel.salary = salary
+        vc.resultStringModel.discount = discounts
+        vc.resultStringModel.inssValue = inss
+        vc.resultStringModel.irrfValue = irrf
+        vc.resultStringModel.netSalary = netSalary
+        vc.resultStringModel.inssPercentage = inssPercentage
+        vc.resultStringModel.irrfPercentage = irrfPercentage
         self.present(vc, animated: true, completion: nil)
     }
     

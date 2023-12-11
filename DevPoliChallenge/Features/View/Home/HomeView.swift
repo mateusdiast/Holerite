@@ -123,6 +123,7 @@ extension HomeView: UITextFieldDelegate {
        if textField == salaryField {
           if let digit = Int(string){
               amtSalaryField = amtSalaryField * 10 + digit
+              print(amtSalaryField)
               salaryField.text = updateSalaryField()
            }
            if string == "" {
