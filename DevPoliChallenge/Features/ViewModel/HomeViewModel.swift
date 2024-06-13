@@ -11,6 +11,9 @@ import Foundation
 protocol HomeViewModelDelegate: AnyObject {
     func goToResult(_ salary: String, _ inss: String, _ irrf: String, _ netSalary: String, _ discount: String, _ inssPercentage: String, _ irrfPercentage: String)
     func alertValuesInvalidate()
+    func sendDataSalaryField(value: Double)
+    func sendDataDiscountsField(value: Double)
+    func alertDataInvalid()
 }
 
 final class HomeViewModel{
@@ -19,6 +22,16 @@ final class HomeViewModel{
     
     private var resultDoubleModel = ResultDoubleModel()
     private var resultStringModel = ResultStringModel()
+    private var formatterSalary: Formatter
+    private var formatterDiscount: Formatter
+
+    
+  
+    init(formatterSalary: Formatter, formatterDiscount: Formatter) {
+        self.formatterSalary = formatterSalary
+        self.formatterDiscount = formatterDiscount
+    }
+
     
     
     func calculate(salary: String, discounts: String){
@@ -39,9 +52,9 @@ final class HomeViewModel{
         
         if resultDoubleModel.salary != 0 {
             delegate?.goToResult(resultStringModel.salary, resultStringModel.inssValue, resultStringModel.irrfValue, resultStringModel.netSalary, resultStringModel.discount, resultStringModel.inssPercentage, resultStringModel.irrfPercentage)
-         } else{
+        } else{
             delegate?.alertValuesInvalidate()
-         }
+        }
         
         
     }
@@ -78,14 +91,14 @@ final class HomeViewModel{
             resultDoubleModel.valueToCalculate = (resultDoubleModel.salaryWithInss / 100) * 7.5
             resultDoubleModel.irrfValue = resultDoubleModel.valueToCalculate - resultDoubleModel.deduction
             resultDoubleModel.irrfPercentage = (resultDoubleModel.irrfValue / resultDoubleModel.salaryWithInss) * 100
-
+            
         case IRRFModel.nivelThree:
             resultDoubleModel.deduction = 370.40
             resultDoubleModel.salaryWithInss = resultDoubleModel.salary - resultDoubleModel.inssValue
             resultDoubleModel.valueToCalculate = (resultDoubleModel.salaryWithInss / 100) * 15
             resultDoubleModel.irrfValue = resultDoubleModel.valueToCalculate - resultDoubleModel.deduction
             resultDoubleModel.irrfPercentage = (resultDoubleModel.irrfValue / resultDoubleModel.salaryWithInss) * 100
-
+            
         case IRRFModel.nivelFour:
             resultDoubleModel.deduction = 651.73
             resultDoubleModel.salaryWithInss = resultDoubleModel.salary - resultDoubleModel.inssValue
@@ -99,9 +112,9 @@ final class HomeViewModel{
             resultDoubleModel.irrfValue = resultDoubleModel.valueToCalculate - resultDoubleModel.deduction
             resultDoubleModel.irrfPercentage = (resultDoubleModel.irrfValue / resultDoubleModel.salaryWithInss) * 100
         }
-       
-    }
         
+    }
+    
     private func calculateNetSalary(){
         resultDoubleModel.netSalary = resultDoubleModel.salary - (resultDoubleModel.discount + resultDoubleModel.inssValue + resultDoubleModel.irrfValue)
     }
@@ -121,6 +134,35 @@ final class HomeViewModel{
         formatter.numberStyle = .currency
         formatter.currencySymbol = "R$"
         return formatter.string(from: value as NSNumber)!
+    }
+    
+    func validadeDataTyped(value: String, key: Int) {
+        let valueTapped = value.range(of: NumberRegex.numberValue, options: .regularExpression)
+        
+        if valueTapped != nil {
+            formatValues(value: value, key: key)
+            return
+        }
+        
+        delegate?.alertDataInvalid()
+    }
+    
+    private func formatValues(value: String, key: Int) {
+        
+        let keyCases = KeyTextField(rawValue: key)
+
+        switch keyCases {
+        case .salary:
+            let resultValue = formatterSalary.format(value: value)
+            delegate?.sendDataSalaryField(value: resultValue)
+        case .discounts:
+            let resultValue = formatterDiscount.format(value: value)
+            delegate?.sendDataDiscountsField(value: resultValue)
+            
+        default:
+            return
+        }
+        
     }
 }
 

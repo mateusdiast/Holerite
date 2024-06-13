@@ -10,7 +10,7 @@ import UIKit
 
 final class HomeViewController: UIViewController {
 
-    let homeViewModel = HomeViewModel()
+    let homeViewModel = HomeViewModel(formatterSalary: FormatterSalary(), formatterDiscount: FormatterDiscount())
     let homeView = HomeView()
     
     override func viewDidLoad() {
@@ -36,6 +36,24 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: HomeViewModelDelegate {
+    
+    func alertDataInvalid() {
+        let alert = UIAlertController(title: "Número invalido!", message: "Insira um número valido!", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Tentar novamente!", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
+    
+    func sendDataSalaryField(value: Double) {
+        homeView.updateSalaryField(value: value)
+    }
+    
+    func sendDataDiscountsField(value: Double) {
+        homeView.updateDiscountField(value: value)
+    }
+    
+ 
+    
     func goToResult(_ salary: String, _ inss: String, _ irrf: String, _ netSalary: String, _ discounts: String, _ inssPercentage: String, _ irrfPercentage: String) {
         let vc = ResultViewController()
         vc.resultStringModel.salary = salary
@@ -58,6 +76,12 @@ extension HomeViewController: HomeViewModelDelegate {
 }
 
 extension HomeViewController: HomeViewDelegate {
+    
+    func sendDataTyped(value: String, key: Int) {
+        homeViewModel.validadeDataTyped(value: value, key: key)
+    }
+    
+    
     
     func verifyDatas(salary: String, discounts: String){
         homeViewModel.calculate(salary: salary, discounts: discounts)
