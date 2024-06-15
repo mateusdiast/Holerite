@@ -1,5 +1,5 @@
 //
-//  INSSModel.swift
+//  Calculate.swift
 //  DevPoliChallenge-Holerite
 //
 //  Created by Mateus Dias on 14/06/24.
@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct INSSModel: Tribute {
-    var value: Double?
-    var percentage: Double?
+
+protocol Calculator {
+    func calculate(value: Double) -> Any
 }
+

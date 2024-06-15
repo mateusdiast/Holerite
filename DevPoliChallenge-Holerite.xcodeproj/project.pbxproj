@@ -17,16 +17,23 @@
 		4C3862B02A75881C005C9C3B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C3862AE2A75881C005C9C3B /* LaunchScreen.storyboard */; };
 		E5034A282C19183900CFDE28 /* KeyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5034A272C19183900CFDE28 /* KeyTextField.swift */; };
 		E55781422B25FECB00CAA623 /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55781412B25FECB00CAA623 /* ExtensionString.swift */; };
-		E55781442B27B5B800CAA623 /* ResultDoubleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55781432B27B5B800CAA623 /* ResultDoubleModel.swift */; };
-		E55781462B27BB3200CAA623 /* ResultStringModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55781452B27BB3200CAA623 /* ResultStringModel.swift */; };
 		E57E88492C1A46270043FF2F /* NumberRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57E88482C1A46270043FF2F /* NumberRegex.swift */; };
 		E57E884C2C1A6C170043FF2F /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57E884B2C1A6C170043FF2F /* Formatter.swift */; };
 		E57E884E2C1A6C660043FF2F /* FormatterSalary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57E884D2C1A6C660043FF2F /* FormatterSalary.swift */; };
 		E57E88522C1A71240043FF2F /* FormatterDiscount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57E88512C1A71240043FF2F /* FormatterDiscount.swift */; };
 		E5812A712B211AB100C6ACC1 /* ContainerOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5812A702B211AB100C6ACC1 /* ContainerOneView.swift */; };
 		E5812A732B229C5400C6ACC1 /* ContainerTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5812A722B229C5400C6ACC1 /* ContainerTwoView.swift */; };
-		E5C54A3C2B237F7700637016 /* INSSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C54A3B2B237F7700637016 /* INSSModel.swift */; };
-		E5C54A3E2B238D4A00637016 /* IRRFModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C54A3D2B238D4A00637016 /* IRRFModel.swift */; };
+		E5C54A3C2B237F7700637016 /* INSSCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C54A3B2B237F7700637016 /* INSSCase.swift */; };
+		E5C54A3E2B238D4A00637016 /* IRRFCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C54A3D2B238D4A00637016 /* IRRFCase.swift */; };
+		E5D277072C1CF90B00F9FB47 /* INSSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D277062C1CF90B00F9FB47 /* INSSModel.swift */; };
+		E5D277092C1CF95F00F9FB47 /* IRRFModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D277082C1CF95F00F9FB47 /* IRRFModel.swift */; };
+		E5D2770C2C1CFA5400F9FB47 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D2770B2C1CFA5400F9FB47 /* Calculator.swift */; };
+		E5D2770F2C1CFC6100F9FB47 /* INSSCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D2770E2C1CFC6100F9FB47 /* INSSCalculator.swift */; };
+		E5D277122C1CFD6700F9FB47 /* Tribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D277112C1CFD6700F9FB47 /* Tribute.swift */; };
+		E5D277152C1CFFA000F9FB47 /* IRRFCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D277142C1CFFA000F9FB47 /* IRRFCalculator.swift */; };
+		E5D277182C1D1CD900F9FB47 /* SalaryCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D277172C1D1CD900F9FB47 /* SalaryCalculator.swift */; };
+		E5D2771A2C1DC42C00F9FB47 /* InputSalaryValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D277192C1DC42C00F9FB47 /* InputSalaryValue.swift */; };
+		E5D2771C2C1DC46300F9FB47 /* InputIRRFValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D2771B2C1DC46300F9FB47 /* InputIRRFValues.swift */; };
 		E5D5CDE62C17BE560065909A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5CDE52C17BE560065909A /* CustomTextField.swift */; };
 		E5D5CDEA2C17BF0D0065909A /* ViewConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D5CDE92C17BF0D0065909A /* ViewConfig.swift */; };
 		E5ED20CD2B1E821A00C5296D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED20CC2B1E821A00C5296D /* HomeView.swift */; };
@@ -49,16 +56,23 @@
 		4C3862B12A75881C005C9C3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5034A272C19183900CFDE28 /* KeyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyTextField.swift; sourceTree = "<group>"; };
 		E55781412B25FECB00CAA623 /* ExtensionString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionString.swift; sourceTree = "<group>"; };
-		E55781432B27B5B800CAA623 /* ResultDoubleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultDoubleModel.swift; sourceTree = "<group>"; };
-		E55781452B27BB3200CAA623 /* ResultStringModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStringModel.swift; sourceTree = "<group>"; };
 		E57E88482C1A46270043FF2F /* NumberRegex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberRegex.swift; sourceTree = "<group>"; };
 		E57E884B2C1A6C170043FF2F /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		E57E884D2C1A6C660043FF2F /* FormatterSalary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterSalary.swift; sourceTree = "<group>"; };
 		E57E88512C1A71240043FF2F /* FormatterDiscount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterDiscount.swift; sourceTree = "<group>"; };
 		E5812A702B211AB100C6ACC1 /* ContainerOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerOneView.swift; sourceTree = "<group>"; };
 		E5812A722B229C5400C6ACC1 /* ContainerTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTwoView.swift; sourceTree = "<group>"; };
-		E5C54A3B2B237F7700637016 /* INSSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INSSModel.swift; sourceTree = "<group>"; };
-		E5C54A3D2B238D4A00637016 /* IRRFModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRRFModel.swift; sourceTree = "<group>"; };
+		E5C54A3B2B237F7700637016 /* INSSCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INSSCase.swift; sourceTree = "<group>"; };
+		E5C54A3D2B238D4A00637016 /* IRRFCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRRFCase.swift; sourceTree = "<group>"; };
+		E5D277062C1CF90B00F9FB47 /* INSSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INSSModel.swift; sourceTree = "<group>"; };
+		E5D277082C1CF95F00F9FB47 /* IRRFModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRRFModel.swift; sourceTree = "<group>"; };
+		E5D2770B2C1CFA5400F9FB47 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		E5D2770E2C1CFC6100F9FB47 /* INSSCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INSSCalculator.swift; sourceTree = "<group>"; };
+		E5D277112C1CFD6700F9FB47 /* Tribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tribute.swift; sourceTree = "<group>"; };
+		E5D277142C1CFFA000F9FB47 /* IRRFCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRRFCalculator.swift; sourceTree = "<group>"; };
+		E5D277172C1D1CD900F9FB47 /* SalaryCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalaryCalculator.swift; sourceTree = "<group>"; };
+		E5D277192C1DC42C00F9FB47 /* InputSalaryValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSalaryValue.swift; sourceTree = "<group>"; };
+		E5D2771B2C1DC46300F9FB47 /* InputIRRFValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputIRRFValues.swift; sourceTree = "<group>"; };
 		E5D5CDE52C17BE560065909A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		E5D5CDE92C17BF0D0065909A /* ViewConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConfig.swift; sourceTree = "<group>"; };
 		E5ED20CC2B1E821A00C5296D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -164,6 +178,24 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		E5659A552C1E53FA00A5251B /* Regex */ = {
+			isa = PBXGroup;
+			children = (
+				E57E88482C1A46270043FF2F /* NumberRegex.swift */,
+			);
+			path = Regex;
+			sourceTree = "<group>";
+		};
+		E5659A562C1E541100A5251B /* Cases */ = {
+			isa = PBXGroup;
+			children = (
+				E5C54A3B2B237F7700637016 /* INSSCase.swift */,
+				E5C54A3D2B238D4A00637016 /* IRRFCase.swift */,
+				E5034A272C19183900CFDE28 /* KeyTextField.swift */,
+			);
+			path = Cases;
+			sourceTree = "<group>";
+		};
 		E57E884A2C1A6C020043FF2F /* Formatter */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,12 +209,11 @@
 		E5C54A3A2B237F6000637016 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E5C54A3B2B237F7700637016 /* INSSModel.swift */,
-				E5C54A3D2B238D4A00637016 /* IRRFModel.swift */,
-				E55781432B27B5B800CAA623 /* ResultDoubleModel.swift */,
-				E55781452B27BB3200CAA623 /* ResultStringModel.swift */,
-				E5034A272C19183900CFDE28 /* KeyTextField.swift */,
-				E57E88482C1A46270043FF2F /* NumberRegex.swift */,
+				E5659A562C1E541100A5251B /* Cases */,
+				E5659A552C1E53FA00A5251B /* Regex */,
+				E5D277102C1CFD3B00F9FB47 /* Protocols */,
+				E5D277062C1CF90B00F9FB47 /* INSSModel.swift */,
+				E5D277082C1CF95F00F9FB47 /* IRRFModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -193,6 +224,51 @@
 				E5ED20D32B1EB57100C5296D /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E5D2770A2C1CFA4600F9FB47 /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				E5D277162C1D1CC100F9FB47 /* Salary */,
+				E5D277132C1CFF8F00F9FB47 /* IRRF */,
+				E5D2770D2C1CFC4C00F9FB47 /* INSS */,
+				E5D2770B2C1CFA5400F9FB47 /* Calculator.swift */,
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
+		E5D2770D2C1CFC4C00F9FB47 /* INSS */ = {
+			isa = PBXGroup;
+			children = (
+				E5D2770E2C1CFC6100F9FB47 /* INSSCalculator.swift */,
+			);
+			path = INSS;
+			sourceTree = "<group>";
+		};
+		E5D277102C1CFD3B00F9FB47 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E5D277112C1CFD6700F9FB47 /* Tribute.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E5D277132C1CFF8F00F9FB47 /* IRRF */ = {
+			isa = PBXGroup;
+			children = (
+				E5D2771B2C1DC46300F9FB47 /* InputIRRFValues.swift */,
+				E5D277142C1CFFA000F9FB47 /* IRRFCalculator.swift */,
+			);
+			path = IRRF;
+			sourceTree = "<group>";
+		};
+		E5D277162C1D1CC100F9FB47 /* Salary */ = {
+			isa = PBXGroup;
+			children = (
+				E5D277192C1DC42C00F9FB47 /* InputSalaryValue.swift */,
+				E5D277172C1D1CD900F9FB47 /* SalaryCalculator.swift */,
+			);
+			path = Salary;
 			sourceTree = "<group>";
 		};
 		E5D5CDE42C17BE250065909A /* Components */ = {
@@ -206,6 +282,7 @@
 		E5D5CDE72C17BEE80065909A /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				E5D2770A2C1CFA4600F9FB47 /* Calculator */,
 				E57E884A2C1A6C020043FF2F /* Formatter */,
 				E5D5CDE82C17BEF00065909A /* ViewConfig */,
 			);
@@ -322,27 +399,34 @@
 			files = (
 				E5ED20CF2B1EB17E00C5296D /* ResultViewController.swift in Sources */,
 				E5ED20D42B1EB57100C5296D /* HomeViewModel.swift in Sources */,
-				E55781462B27BB3200CAA623 /* ResultStringModel.swift in Sources */,
-				E5C54A3E2B238D4A00637016 /* IRRFModel.swift in Sources */,
+				E5C54A3E2B238D4A00637016 /* IRRFCase.swift in Sources */,
 				4C3862A82A758819005C9C3B /* HomeViewController.swift in Sources */,
 				E5ED20CD2B1E821A00C5296D /* HomeView.swift in Sources */,
 				E55781422B25FECB00CAA623 /* ExtensionString.swift in Sources */,
 				4C33FF352A75A4550002E765 /* DS+Colors.swift in Sources */,
 				E5D5CDE62C17BE560065909A /* CustomTextField.swift in Sources */,
 				4C33FF332A75A3F40002E765 /* DS.swift in Sources */,
+				E5D2771A2C1DC42C00F9FB47 /* InputSalaryValue.swift in Sources */,
 				E5812A712B211AB100C6ACC1 /* ContainerOneView.swift in Sources */,
 				E57E884E2C1A6C660043FF2F /* FormatterSalary.swift in Sources */,
+				E5D2770C2C1CFA5400F9FB47 /* Calculator.swift in Sources */,
+				E5D277122C1CFD6700F9FB47 /* Tribute.swift in Sources */,
+				E5D277072C1CF90B00F9FB47 /* INSSModel.swift in Sources */,
 				E5034A282C19183900CFDE28 /* KeyTextField.swift in Sources */,
+				E5D277092C1CF95F00F9FB47 /* IRRFModel.swift in Sources */,
 				4C33FF2E2A75A2640002E765 /* UIColor+ext.swift in Sources */,
+				E5D277152C1CFFA000F9FB47 /* IRRFCalculator.swift in Sources */,
 				E5ED20D62B20062E00C5296D /* ResultView.swift in Sources */,
+				E5D2770F2C1CFC6100F9FB47 /* INSSCalculator.swift in Sources */,
 				E5812A732B229C5400C6ACC1 /* ContainerTwoView.swift in Sources */,
-				E5C54A3C2B237F7700637016 /* INSSModel.swift in Sources */,
+				E5D277182C1D1CD900F9FB47 /* SalaryCalculator.swift in Sources */,
+				E5C54A3C2B237F7700637016 /* INSSCase.swift in Sources */,
 				E5D5CDEA2C17BF0D0065909A /* ViewConfig.swift in Sources */,
-				E55781442B27B5B800CAA623 /* ResultDoubleModel.swift in Sources */,
 				4C3862A42A758819005C9C3B /* AppDelegate.swift in Sources */,
 				E57E88492C1A46270043FF2F /* NumberRegex.swift in Sources */,
 				E57E884C2C1A6C170043FF2F /* Formatter.swift in Sources */,
 				4C3862A62A758819005C9C3B /* SceneDelegate.swift in Sources */,
+				E5D2771C2C1DC46300F9FB47 /* InputIRRFValues.swift in Sources */,
 				E57E88522C1A71240043FF2F /* FormatterDiscount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

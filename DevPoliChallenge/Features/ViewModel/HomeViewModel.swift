@@ -9,132 +9,128 @@
 import Foundation
 
 protocol HomeViewModelDelegate: AnyObject {
-    func goToResult(_ salary: String, _ inss: String, _ irrf: String, _ netSalary: String, _ discount: String, _ inssPercentage: String, _ irrfPercentage: String)
-    func alertValuesInvalidate()
+    func goToResult(values: [String])
+    func alertFieldEmpty()
     func sendDataSalaryField(value: Double)
     func sendDataDiscountsField(value: Double)
     func alertDataInvalid()
 }
 
-final class HomeViewModel{
+final class HomeViewModel {
     
     weak var delegate: HomeViewModelDelegate?
     
-    private var resultDoubleModel = ResultDoubleModel()
-    private var resultStringModel = ResultStringModel()
     private var formatterSalary: Formatter
     private var formatterDiscount: Formatter
-
+    private var inssCalculator: Calculator
+    private var irrfCalculator: Calculator
+    private var salaryCalculator: Calculator
+    private var inss: Tribute?
+    private var irrf: Tribute?
+    private var netSalary: Double = 0.0
+    private var salary: Double = 0.0
+    private var discount: Double = 0.0
+    private var values: [String] = []
     
-  
-    init(formatterSalary: Formatter, formatterDiscount: Formatter) {
+    
+    
+    init(formatterSalary: Formatter,
+         formatterDiscount: Formatter,
+         inssCalculator: Calculator,
+         irrfCalculator: Calculator,
+         salaryCalculator: Calculator,
+         delegate: HomeViewModelDelegate) {
         self.formatterSalary = formatterSalary
         self.formatterDiscount = formatterDiscount
+        self.inssCalculator = inssCalculator
+        self.irrfCalculator = irrfCalculator
+        self.salaryCalculator = salaryCalculator
+        self.delegate = delegate
     }
-
     
-    
-    func calculate(salary: String, discounts: String){
-        
-        
+    func verifyData(salary: String, discounts: String) {
         let salaryFormatted = salary.dropFirst(2)
-        guard let salaryDouble = Double(salaryFormatted.replacingOccurrences(of: ",", with: "")) else {return}
+        guard let salaryDouble = Double(salaryFormatted.replacingOccurrences(of: ",", with: "")) else {
+            delegate?.alertFieldEmpty()
+            return
+        }
         let discountsFormatted = discounts.dropFirst(2)
-        guard let discountsDouble = Double(discountsFormatted.replacingOccurrences(of: ",", with: "")) else {return}
-        
-        resultDoubleModel.salary = salaryDouble
-        resultDoubleModel.discount = discountsDouble
-        
-        calculateINSS()
-        calculateIRRF()
-        calculateNetSalary()
-        formattedValuesToString()
-        
-        if resultDoubleModel.salary != 0 {
-            delegate?.goToResult(resultStringModel.salary, resultStringModel.inssValue, resultStringModel.irrfValue, resultStringModel.netSalary, resultStringModel.discount, resultStringModel.inssPercentage, resultStringModel.irrfPercentage)
-        } else{
-            delegate?.alertValuesInvalidate()
+        if let discountDouble = Double(discountsFormatted.replacingOccurrences(of: ",", with: "")) {
+            discount = discountDouble
         }
         
-        
-    }
-    
-    private func calculateINSS(){
-        switch (resultDoubleModel.salary) {
-        case INSSModel.nivelOn:
-            resultDoubleModel.inssValue = 0.00
-            resultDoubleModel.inssPercentage = 0.0
-        case INSSModel.nivelTwo:
-            resultDoubleModel.inssValue = (resultDoubleModel.salary / 100) * 7.5
-            resultDoubleModel.inssPercentage = 7.5
-        case INSSModel.nivelThree:
-            resultDoubleModel.inssValue = (resultDoubleModel.salary / 100) * 9.0
-            resultDoubleModel.inssPercentage = 9.0
-        case INSSModel.nivelFour:
-            resultDoubleModel.inssValue = (resultDoubleModel.salary / 100) * 12.0
-            resultDoubleModel.inssPercentage = 12.0
-        default:
-            resultDoubleModel.inssValue = (resultDoubleModel.salary / 100) * 14.0
-            resultDoubleModel.inssPercentage = 14.0
+        if salaryDouble <= 0.0 {
+            delegate?.alertFieldEmpty()
+            return
         }
+        self.salary = salaryDouble
+        calculate()
+    }
+}
+
+// MARK: FORMAT VALUES
+
+extension HomeViewModel {
+    
+    private func formattedValuesToString() {
+        values.removeAll()
+        values.append(formatterValues(inss?.value ?? 0.0))
+        values.append(formatterValues(irrf?.value ?? 0.0))
+        values.append(formatterValues(discount))
+        values.append(formatterValues(salary))
+        values.append(formatterValues(netSalary))
+        values.append(String(format: "%.0f", inss?.percentage ?? 0.0))
+        values.append(String(format: "%.0f", irrf?.percentage ?? 0.0))
     }
     
-    
-    private func calculateIRRF(){
-        switch (resultDoubleModel.salary) {
-        case IRRFModel.nivelOn:
-            resultDoubleModel.irrfValue = 0.00
-            resultDoubleModel.irrfPercentage = 0.0
-        case IRRFModel.nivelTwo:
-            resultDoubleModel.deduction = 142.0
-            resultDoubleModel.salaryWithInss = resultDoubleModel.salary - resultDoubleModel.inssValue
-            resultDoubleModel.valueToCalculate = (resultDoubleModel.salaryWithInss / 100) * 7.5
-            resultDoubleModel.irrfValue = resultDoubleModel.valueToCalculate - resultDoubleModel.deduction
-            resultDoubleModel.irrfPercentage = (resultDoubleModel.irrfValue / resultDoubleModel.salaryWithInss) * 100
-            
-        case IRRFModel.nivelThree:
-            resultDoubleModel.deduction = 370.40
-            resultDoubleModel.salaryWithInss = resultDoubleModel.salary - resultDoubleModel.inssValue
-            resultDoubleModel.valueToCalculate = (resultDoubleModel.salaryWithInss / 100) * 15
-            resultDoubleModel.irrfValue = resultDoubleModel.valueToCalculate - resultDoubleModel.deduction
-            resultDoubleModel.irrfPercentage = (resultDoubleModel.irrfValue / resultDoubleModel.salaryWithInss) * 100
-            
-        case IRRFModel.nivelFour:
-            resultDoubleModel.deduction = 651.73
-            resultDoubleModel.salaryWithInss = resultDoubleModel.salary - resultDoubleModel.inssValue
-            resultDoubleModel.valueToCalculate = (resultDoubleModel.salaryWithInss / 100) * 22.5
-            resultDoubleModel.irrfValue = resultDoubleModel.valueToCalculate - resultDoubleModel.deduction
-            resultDoubleModel.irrfPercentage = (resultDoubleModel.irrfValue / resultDoubleModel.salaryWithInss) * 100
-        default:
-            resultDoubleModel.deduction = 884.96
-            resultDoubleModel.salaryWithInss = resultDoubleModel.salary - resultDoubleModel.inssValue
-            resultDoubleModel.valueToCalculate = (resultDoubleModel.salaryWithInss / 100) * 27.5
-            resultDoubleModel.irrfValue = resultDoubleModel.valueToCalculate - resultDoubleModel.deduction
-            resultDoubleModel.irrfPercentage = (resultDoubleModel.irrfValue / resultDoubleModel.salaryWithInss) * 100
-        }
-        
-    }
-    
-    private func calculateNetSalary(){
-        resultDoubleModel.netSalary = resultDoubleModel.salary - (resultDoubleModel.discount + resultDoubleModel.inssValue + resultDoubleModel.irrfValue)
-    }
-    
-    func formattedValuesToString(){
-        resultStringModel.inssValue = formatterValues(resultDoubleModel.inssValue)
-        resultStringModel.irrfValue = formatterValues(resultDoubleModel.irrfValue)
-        resultStringModel.discount = formatterValues(resultDoubleModel.discount)
-        resultStringModel.salary = formatterValues(resultDoubleModel.salary)
-        resultStringModel.netSalary = formatterValues(resultDoubleModel.netSalary)
-        resultStringModel.inssPercentage = String(format: "%.0f", resultDoubleModel.inssPercentage)
-        resultStringModel.irrfPercentage = String(format: "%.0f", resultDoubleModel.irrfPercentage)
-    }
-    
-    func formatterValues(_ value: Double) -> String {
+    private func formatterValues(_ value: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencySymbol = "R$"
         return formatter.string(from: value as NSNumber)!
     }
+}
+
+// MARK: CALCULATE
+
+extension HomeViewModel {
+    
+    private func calculate(){
+        calculateINSS()
+        calculateIRRF()
+        calculateNetSalary()
+        formattedValuesToString()
+        delegate?.goToResult(values: values)
+    }
+    
+    private func calculateINSS() {
+        let result = inssCalculator.calculate(value: salary)
+        inss = result as? Tribute
+    }
+    
+    private func calculateIRRF() {
+        let irrfInput = irrfCalculator as? InputIRRFValue
+        if let inss = inss {
+            irrfInput?.setINSSValue(inssValue: inss)
+        }
+        let irrfCalculate = irrfInput as? Calculator
+        let irrfResult = irrfCalculate?.calculate(value: salary)
+        irrf = irrfResult as? Tribute
+    }
+    
+    private func calculateNetSalary() {
+        let salaryInput = salaryCalculator as? InputSalaryValue
+        salaryInput?.setValues(discount: discount, inss: inss, irrf: irrf)
+        let salaryCalculate = salaryInput as? Calculator
+        if let result = salaryCalculate?.calculate(value: salary) as? Double {
+            netSalary = result
+        }
+    }
+}
+
+// MARK: FORMAT TEXTFIELD
+
+extension HomeViewModel {
     
     func validadeDataTyped(value: String, key: Int) {
         let valueTapped = value.range(of: NumberRegex.numberValue, options: .regularExpression)

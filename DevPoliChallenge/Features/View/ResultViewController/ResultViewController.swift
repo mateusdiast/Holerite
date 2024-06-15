@@ -12,16 +12,25 @@ class ResultViewController: UIViewController {
     
     let resultView = ResultView()
     
-    var resultStringModel = ResultStringModel()
-
+    private var values: [String]
+    
+    init(values: [String]) {
+        self.values = values
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         resultView.delegate = self
-        resultView.viewGrossSalary.setValue(resultStringModel.salary)
-        resultView.viewDiscounts.setValueDiscounts(resultStringModel.discount)
-        resultView.viewINSSDiscounts.setValueDiscounts(resultStringModel.inssValue, resultStringModel.inssPercentage)
-        resultView.viewIRRFDiscounts.setValueDiscounts(resultStringModel.irrfValue, resultStringModel.irrfPercentage)
-        resultView.viewNetSalary.setValue(resultStringModel.netSalary)
+        resultView.viewGrossSalary.setValue(values[3])
+        resultView.viewDiscounts.setValueDiscounts(values[2])
+        resultView.viewINSSDiscounts.setValueDiscounts(values[0], values[5])
+        resultView.viewIRRFDiscounts.setValueDiscounts(values[1], values[6])
+        resultView.viewNetSalary.setValue(values[4])
     }
     
     override func loadView() {

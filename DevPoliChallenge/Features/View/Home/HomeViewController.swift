@@ -9,14 +9,22 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
+    
+    private lazy var homeViewModel: HomeViewModel  = {
+        let viewModel = HomeViewModel(formatterSalary: FormatterSalary(),
+                                      formatterDiscount: FormatterSalary(),
+                                      inssCalculator: INSSCalculator(inss: INSSModel()),
+                                      irrfCalculator: IRRFCalculator(irrf: IRRFModel()),
+                                      salaryCalculator: SalaryCalculator(),
+                                      delegate: self)
+        return viewModel
+    }()
 
-    let homeViewModel = HomeViewModel(formatterSalary: FormatterSalary(), formatterDiscount: FormatterDiscount())
-    let homeView = HomeView()
+    private let homeView = HomeView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
-        homeViewModel.delegate = self
         homeView.delegate = self
     }
     
@@ -52,22 +60,13 @@ extension HomeViewController: HomeViewModelDelegate {
         homeView.updateDiscountField(value: value)
     }
     
- 
-    
-    func goToResult(_ salary: String, _ inss: String, _ irrf: String, _ netSalary: String, _ discounts: String, _ inssPercentage: String, _ irrfPercentage: String) {
-        let vc = ResultViewController()
-        vc.resultStringModel.salary = salary
-        vc.resultStringModel.discount = discounts
-        vc.resultStringModel.inssValue = inss
-        vc.resultStringModel.irrfValue = irrf
-        vc.resultStringModel.netSalary = netSalary
-        vc.resultStringModel.inssPercentage = inssPercentage
-        vc.resultStringModel.irrfPercentage = irrfPercentage
+    func goToResult(values: [String]) {
+        let vc = ResultViewController(values: values)
         self.present(vc, animated: true, completion: nil)
     }
     
-    func alertValuesInvalidate() {
-        let alert = UIAlertController(title: "Error", message: "Preencha o campo de texto!", preferredStyle: UIAlertController.Style.alert)
+    func alertFieldEmpty() {
+        let alert = UIAlertController(title: "Error", message: "Preencha o campo de salário!", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Tentar novamente!", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -84,6 +83,6 @@ extension HomeViewController: HomeViewDelegate {
     
     
     func verifyDatas(salary: String, discounts: String){
-        homeViewModel.calculate(salary: salary, discounts: discounts)
+        homeViewModel.verifyData(salary: salary, discounts: discounts)
     }
 }
