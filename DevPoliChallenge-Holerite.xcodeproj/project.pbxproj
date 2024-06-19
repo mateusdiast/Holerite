@@ -21,8 +21,6 @@
 		E57E884C2C1A6C170043FF2F /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57E884B2C1A6C170043FF2F /* Formatter.swift */; };
 		E57E884E2C1A6C660043FF2F /* FormatterSalary.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57E884D2C1A6C660043FF2F /* FormatterSalary.swift */; };
 		E57E88522C1A71240043FF2F /* FormatterDiscount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57E88512C1A71240043FF2F /* FormatterDiscount.swift */; };
-		E5812A712B211AB100C6ACC1 /* ContainerOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5812A702B211AB100C6ACC1 /* ContainerOneView.swift */; };
-		E5812A732B229C5400C6ACC1 /* ContainerTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5812A722B229C5400C6ACC1 /* ContainerTwoView.swift */; };
 		E59376642C22378B0037894B /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59376632C22378B0037894B /* ResultViewModel.swift */; };
 		E5BB92FD2C1F0FE9009D3C54 /* ContainerResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB92FC2C1F0FE9009D3C54 /* ContainerResultView.swift */; };
 		E5C54A3C2B237F7700637016 /* INSSCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C54A3B2B237F7700637016 /* INSSCase.swift */; };
@@ -62,8 +60,6 @@
 		E57E884B2C1A6C170043FF2F /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		E57E884D2C1A6C660043FF2F /* FormatterSalary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterSalary.swift; sourceTree = "<group>"; };
 		E57E88512C1A71240043FF2F /* FormatterDiscount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterDiscount.swift; sourceTree = "<group>"; };
-		E5812A702B211AB100C6ACC1 /* ContainerOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerOneView.swift; sourceTree = "<group>"; };
-		E5812A722B229C5400C6ACC1 /* ContainerTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTwoView.swift; sourceTree = "<group>"; };
 		E59376632C22378B0037894B /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
 		E5BB92FC2C1F0FE9009D3C54 /* ContainerResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerResultView.swift; sourceTree = "<group>"; };
 		E5C54A3B2B237F7700637016 /* INSSCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INSSCase.swift; sourceTree = "<group>"; };
@@ -341,8 +337,6 @@
 			children = (
 				E5ED20CE2B1EB17E00C5296D /* ResultViewController.swift */,
 				E5ED20D52B20062E00C5296D /* ResultView.swift */,
-				E5812A702B211AB100C6ACC1 /* ContainerOneView.swift */,
-				E5812A722B229C5400C6ACC1 /* ContainerTwoView.swift */,
 				E5BB92FC2C1F0FE9009D3C54 /* ContainerResultView.swift */,
 			);
 			path = ResultViewController;
@@ -429,7 +423,6 @@
 				E5D5CDE62C17BE560065909A /* CustomTextField.swift in Sources */,
 				4C33FF332A75A3F40002E765 /* DS.swift in Sources */,
 				E5D2771A2C1DC42C00F9FB47 /* InputSalaryValue.swift in Sources */,
-				E5812A712B211AB100C6ACC1 /* ContainerOneView.swift in Sources */,
 				E57E884E2C1A6C660043FF2F /* FormatterSalary.swift in Sources */,
 				E5D2770C2C1CFA5400F9FB47 /* Calculator.swift in Sources */,
 				E5D277122C1CFD6700F9FB47 /* Tribute.swift in Sources */,
@@ -441,7 +434,6 @@
 				E5D277152C1CFFA000F9FB47 /* IRRFCalculator.swift in Sources */,
 				E5ED20D62B20062E00C5296D /* ResultView.swift in Sources */,
 				E5D2770F2C1CFC6100F9FB47 /* INSSCalculator.swift in Sources */,
-				E5812A732B229C5400C6ACC1 /* ContainerTwoView.swift in Sources */,
 				E5D277182C1D1CD900F9FB47 /* SalaryCalculator.swift in Sources */,
 				E5C54A3C2B237F7700637016 /* INSSCase.swift in Sources */,
 				E59376642C22378B0037894B /* ResultViewModel.swift in Sources */,
