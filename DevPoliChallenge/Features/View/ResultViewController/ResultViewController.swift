@@ -10,13 +10,18 @@ import UIKit
 
 class ResultViewController: UIViewController {
     
-    let resultView = ResultView()
+    private var resultView: ResultView
+    private var data: [String] = []
     
-    private var values: [String]
+    lazy var viewModel: ResultViewModel = {
+        let viewModel = ResultViewModel(delegate: self)
+        return viewModel
+    }()
     
-    init(values: [String]) {
-        self.values = values
+    init(resultView: ResultView) {
+        self.resultView = resultView
         super.init(nibName: nil, bundle: nil)
+
     }
     
     required init?(coder: NSCoder) {
@@ -26,11 +31,7 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         resultView.delegate = self
-        resultView.viewGrossSalary.setValue(values[3])
-        resultView.viewDiscounts.setValueDiscounts(values[2])
-        resultView.viewINSSDiscounts.setValueDiscounts(values[0], values[5])
-        resultView.viewIRRFDiscounts.setValueDiscounts(values[1], values[6])
-        resultView.viewNetSalary.setValue(values[4])
+        resultView.callTheActionVerify()
     }
     
     override func loadView() {
@@ -39,9 +40,23 @@ class ResultViewController: UIViewController {
 }
 
 extension ResultViewController: ResultViewDelegate {
+    
+    func sendDataToVerify(value: String, percentage: String, view: Any) {
+        viewModel.verifyData(data: value, view: view)
+    }
+    
     func backToPreviousView() {
         self.dismiss(animated: true)
     }
+}
+
+extension ResultViewController: ResultViewModelDelegate {
+    func configValueEqualZero(view: Any) {
+        resultView.configValueEqualZero(view: view)
+    }
     
-    
+    func configValueDifferentZero(view: Any) {
+        resultView.configValueDifferentZero(view: view)
+    }
+  
 }

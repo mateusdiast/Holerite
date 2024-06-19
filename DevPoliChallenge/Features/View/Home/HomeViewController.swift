@@ -61,7 +61,7 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func goToResult(values: [String]) {
-        let vc = ResultViewController(values: values)
+        let vc = ResultViewController(resultView: ResultView(data: values))
         self.present(vc, animated: true, completion: nil)
     }
     

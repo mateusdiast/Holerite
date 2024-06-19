@@ -10,32 +10,17 @@ import UIKit
 
 protocol ResultViewDelegate: AnyObject{
     func backToPreviousView()
+    func sendDataToVerify(value: String, percentage: String, view: Any)
 }
 
 final class ResultView: UIView {
     
     weak var delegate: ResultViewDelegate?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = DesignSystem.Colors.backgroundView
-        setupView()
-        setupConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    private var data: [String] = []
     
     private lazy var stackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [
-            viewGrossSalary,
-            viewDiscounts,
-            viewINSSDiscounts,
-            viewIRRFDiscounts,
-            viewNetSalary
-        ])
+        let view = UIStackView()
         view.spacing = 1
         view.distribution = .fillEqually
         view.axis = .vertical
@@ -43,9 +28,7 @@ final class ResultView: UIView {
         return view
     }()
     
-    //VIEWS
-    
-    lazy var backButton: UIButton = {
+   private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setTitle("FECHAR", for: .normal)
         button.setTitleColor(DesignSystem.Colors.backButtonColor, for: .normal)
@@ -55,50 +38,95 @@ final class ResultView: UIView {
         return button
     }()
     
-    lazy var viewGrossSalary: ContainerOneView = {
-        let view = ContainerOneView()
-        view.labelTitle.text = "Salário Bruto"
+   private lazy var viewGrossSalary: ContainerResultView = {
+       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.accent)
+        view.setData(title: "Salário Bruno", value: data[3], percentage: "")
+        return view as ContainerResultView
+    }()
+    
+   private lazy var viewDiscounts: ContainerResultView = {
+       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.tertiary)
+        view.setData(title: "Descontos", value: data[2], percentage: "")
+        return view as ContainerResultView
+    }()
+    
+   private lazy var viewINSSDiscounts: ContainerResultView = {
+       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.tertiary)
+        view.setData(title: "Desconto INSS", value: data[0], percentage: data[5])
+        view.setupPercetage()
         return view
     }()
     
-    lazy var viewDiscounts: ContainerOneView = {
-        let view = ContainerOneView()
-        view.labelTitle.text = "Descontos"
+   private lazy var viewIRRFDiscounts: ContainerResultView = {
+       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.tertiary)
+        view.setData(title: "Desconto IRRF", value: data[1], percentage: data[6])
+        view.setupPercetage()
         return view
     }()
     
-    lazy var viewINSSDiscounts: ContainerTwoView = {
-        let view = ContainerTwoView()
-        view.labelTitle.text = "Desconto INSS"
-        view.labelPercentage.text = "0%"
+   private lazy var viewNetSalary: ContainerResultView = {
+       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.accent)
+        view.setData(title: "Salário liquido", value: data[4], percentage: "")
         return view
     }()
     
-    lazy var viewIRRFDiscounts: ContainerTwoView = {
-        let view = ContainerTwoView()
-        view.labelTitle.text = "Desconto IRRF"
-        view.labelPercentage.text = "0%"
-        return view
-    }()
+    init(data: [String]) {
+        self.data = data
+        super.init(frame: .zero)
+        setup()
+    }
     
-    lazy var viewNetSalary: ContainerOneView = {
-        let view = ContainerOneView()
-        view.labelTitle.text = "Salário liquido"
-        return view
-    }()
-    
-
-    private func setupView(){
-        self.addSubview(stackView)
-        self.addSubview(backButton)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
-    private func setupConstraints(){
+    @objc func backButtonTapped(){
+        delegate?.backToPreviousView()
+    }
+    
+    func setData(data: [String]){
+        self.data = data
+    }
+    
+    func callTheActionVerify(){
+        viewGrossSalary.sendDataToVerify()
+        viewDiscounts.sendDataToVerify()
+        viewNetSalary.sendDataToVerify()
+        viewINSSDiscounts.sendDataToVerify()
+        viewIRRFDiscounts.sendDataToVerify()
+    }
+    
+    func configValueEqualZero(view: Any){
+        if let view = view as? ContainerResultView {
+            view.setConfigValueEqualZero()
+        }
+    }
+    
+    func configValueDifferentZero(view: Any) {
+        if let view = view as? ContainerResultView {
+            view.setConfigValueDifferentZero()
+        }
+    }
+    
+}
+
+extension ResultView: ViewConfig {
+    func buildViews() {
+        addSubview(stackView)
+        addSubview(backButton)
+        stackView.addArrangedSubview(viewGrossSalary)
+        stackView.addArrangedSubview(viewDiscounts)
+        stackView.addArrangedSubview(viewINSSDiscounts)
+        stackView.addArrangedSubview(viewIRRFDiscounts)
+        stackView.addArrangedSubview(viewNetSalary)
+    }
+    
+    func pin() {
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 68),
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 304),
+            stackView.heightAnchor.constraint(equalToConstant: 364),
             
             backButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 22),
             backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 22),
@@ -106,7 +134,15 @@ final class ResultView: UIView {
         ])
     }
     
-    @objc func backButtonTapped(){
-        delegate?.backToPreviousView()
+    func extraSetup() {
+        backgroundColor = DesignSystem.Colors.backgroundView
+    }
+    
+    
+}
+
+extension ResultView: ContainerResultViewDelegate {
+    func sendDataToVerify(value: String, percentage: String, view: Any) {
+        delegate?.sendDataToVerify(value: value, percentage: percentage, view: view)
     }
 }

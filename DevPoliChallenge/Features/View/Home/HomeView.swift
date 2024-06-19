@@ -17,12 +17,6 @@ final class HomeView: UIView {
     
     weak var delegate: HomeViewDelegate?
     
-    init(delegate: HomeViewDelegate) {
-        super.init(frame: .zero)
-        self.delegate = delegate
-    }
-    
-    
     private lazy var currencyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency

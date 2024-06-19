@@ -16,6 +16,7 @@ protocol HomeViewModelDelegate: AnyObject {
     func alertDataInvalid()
 }
 
+
 final class HomeViewModel {
     
     weak var delegate: HomeViewModelDelegate?
@@ -72,18 +73,18 @@ final class HomeViewModel {
 
 extension HomeViewModel {
     
-    private func formattedValuesToString() {
+    private func convertToString() {
         values.removeAll()
-        values.append(formatterValues(inss?.value ?? 0.0))
-        values.append(formatterValues(irrf?.value ?? 0.0))
-        values.append(formatterValues(discount))
-        values.append(formatterValues(salary))
-        values.append(formatterValues(netSalary))
+        values.append(formatToNumberStyle(inss?.value ?? 0.0))
+        values.append(formatToNumberStyle(irrf?.value ?? 0.0))
+        values.append(formatToNumberStyle(discount))
+        values.append(formatToNumberStyle(salary))
+        values.append(formatToNumberStyle(netSalary))
         values.append(String(format: "%.0f", inss?.percentage ?? 0.0))
         values.append(String(format: "%.0f", irrf?.percentage ?? 0.0))
     }
     
-    private func formatterValues(_ value: Double) -> String {
+    private func formatToNumberStyle(_ value: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencySymbol = "R$"
@@ -99,7 +100,7 @@ extension HomeViewModel {
         calculateINSS()
         calculateIRRF()
         calculateNetSalary()
-        formattedValuesToString()
+        convertToString()
         delegate?.goToResult(values: values)
     }
     

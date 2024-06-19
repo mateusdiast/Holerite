@@ -23,6 +23,8 @@
 		E57E88522C1A71240043FF2F /* FormatterDiscount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57E88512C1A71240043FF2F /* FormatterDiscount.swift */; };
 		E5812A712B211AB100C6ACC1 /* ContainerOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5812A702B211AB100C6ACC1 /* ContainerOneView.swift */; };
 		E5812A732B229C5400C6ACC1 /* ContainerTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5812A722B229C5400C6ACC1 /* ContainerTwoView.swift */; };
+		E59376642C22378B0037894B /* ResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59376632C22378B0037894B /* ResultViewModel.swift */; };
+		E5BB92FD2C1F0FE9009D3C54 /* ContainerResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BB92FC2C1F0FE9009D3C54 /* ContainerResultView.swift */; };
 		E5C54A3C2B237F7700637016 /* INSSCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C54A3B2B237F7700637016 /* INSSCase.swift */; };
 		E5C54A3E2B238D4A00637016 /* IRRFCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C54A3D2B238D4A00637016 /* IRRFCase.swift */; };
 		E5D277072C1CF90B00F9FB47 /* INSSModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D277062C1CF90B00F9FB47 /* INSSModel.swift */; };
@@ -62,6 +64,8 @@
 		E57E88512C1A71240043FF2F /* FormatterDiscount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterDiscount.swift; sourceTree = "<group>"; };
 		E5812A702B211AB100C6ACC1 /* ContainerOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerOneView.swift; sourceTree = "<group>"; };
 		E5812A722B229C5400C6ACC1 /* ContainerTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTwoView.swift; sourceTree = "<group>"; };
+		E59376632C22378B0037894B /* ResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewModel.swift; sourceTree = "<group>"; };
+		E5BB92FC2C1F0FE9009D3C54 /* ContainerResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerResultView.swift; sourceTree = "<group>"; };
 		E5C54A3B2B237F7700637016 /* INSSCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INSSCase.swift; sourceTree = "<group>"; };
 		E5C54A3D2B238D4A00637016 /* IRRFCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IRRFCase.swift; sourceTree = "<group>"; };
 		E5D277062C1CF90B00F9FB47 /* INSSModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = INSSModel.swift; sourceTree = "<group>"; };
@@ -206,6 +210,22 @@
 			path = Formatter;
 			sourceTree = "<group>";
 		};
+		E59376612C22376E0037894B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E5ED20D32B1EB57100C5296D /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E59376622C2237790037894B /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				E59376632C22378B0037894B /* ResultViewModel.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
 		E5C54A3A2B237F6000637016 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,7 +241,8 @@
 		E5C54A3F2B2559F400637016 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				E5ED20D32B1EB57100C5296D /* HomeViewModel.swift */,
+				E59376622C2237790037894B /* Result */,
+				E59376612C22376E0037894B /* Home */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -322,6 +343,7 @@
 				E5ED20D52B20062E00C5296D /* ResultView.swift */,
 				E5812A702B211AB100C6ACC1 /* ContainerOneView.swift */,
 				E5812A722B229C5400C6ACC1 /* ContainerTwoView.swift */,
+				E5BB92FC2C1F0FE9009D3C54 /* ContainerResultView.swift */,
 			);
 			path = ResultViewController;
 			sourceTree = "<group>";
@@ -414,6 +436,7 @@
 				E5D277072C1CF90B00F9FB47 /* INSSModel.swift in Sources */,
 				E5034A282C19183900CFDE28 /* KeyTextField.swift in Sources */,
 				E5D277092C1CF95F00F9FB47 /* IRRFModel.swift in Sources */,
+				E5BB92FD2C1F0FE9009D3C54 /* ContainerResultView.swift in Sources */,
 				4C33FF2E2A75A2640002E765 /* UIColor+ext.swift in Sources */,
 				E5D277152C1CFFA000F9FB47 /* IRRFCalculator.swift in Sources */,
 				E5ED20D62B20062E00C5296D /* ResultView.swift in Sources */,
@@ -421,6 +444,7 @@
 				E5812A732B229C5400C6ACC1 /* ContainerTwoView.swift in Sources */,
 				E5D277182C1D1CD900F9FB47 /* SalaryCalculator.swift in Sources */,
 				E5C54A3C2B237F7700637016 /* INSSCase.swift in Sources */,
+				E59376642C22378B0037894B /* ResultViewModel.swift in Sources */,
 				E5D5CDEA2C17BF0D0065909A /* ViewConfig.swift in Sources */,
 				4C3862A42A758819005C9C3B /* AppDelegate.swift in Sources */,
 				E57E88492C1A46270043FF2F /* NumberRegex.swift in Sources */,

@@ -9,8 +9,7 @@
 import UIKit
 
 final class ContainerTwoView: UIView {
-    
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
