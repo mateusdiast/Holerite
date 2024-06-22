@@ -8,18 +8,15 @@
 
 import UIKit
 
-class ResultViewController: UIViewController {
+final class ResultViewController: UIViewController {
     
-    private var resultView: ResultView
+    private var resultView: ResultViewInput
+    private var viewModel: ResultViewModelInput
     private var data: [String] = []
-    
-    lazy var viewModel: ResultViewModel = {
-        let viewModel = ResultViewModel(delegate: self)
-        return viewModel
-    }()
-    
-    init(resultView: ResultView) {
+
+    init(resultView: ResultViewInput, viewModel: ResultViewModelInput) {
         self.resultView = resultView
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
     }
@@ -31,11 +28,12 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         resultView.delegate = self
+        viewModel.delegate = self
         resultView.callTheActionVerify()
     }
     
     override func loadView() {
-        view = resultView
+        view = resultView as? UIView
     }
 }
 

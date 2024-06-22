@@ -10,14 +10,19 @@ import Foundation
 
 protocol HomeViewModelDelegate: AnyObject {
     func goToResult(values: [String])
-    func alertFieldEmpty()
+    func alertFieldInvalidate(message: String)
     func sendDataSalaryField(value: Double)
     func sendDataDiscountsField(value: Double)
     func alertDataInvalid()
 }
 
+protocol HomeViewModelInput {
+    var delegate: HomeViewModelDelegate? {get set}
+    func verifyData(salary: String, discounts: String)
+    func validadeDataTyped(value: String, key: Int)
+}
 
-final class HomeViewModel {
+final class HomeViewModel: HomeViewModelInput {
     
     weak var delegate: HomeViewModelDelegate?
     
@@ -39,29 +44,29 @@ final class HomeViewModel {
          formatterDiscount: Formatter,
          inssCalculator: Calculator,
          irrfCalculator: Calculator,
-         salaryCalculator: Calculator,
-         delegate: HomeViewModelDelegate) {
+         salaryCalculator: Calculator) {
         self.formatterSalary = formatterSalary
         self.formatterDiscount = formatterDiscount
         self.inssCalculator = inssCalculator
         self.irrfCalculator = irrfCalculator
         self.salaryCalculator = salaryCalculator
-        self.delegate = delegate
     }
     
     func verifyData(salary: String, discounts: String) {
         let salaryFormatted = salary.dropFirst(2)
         guard let salaryDouble = Double(salaryFormatted.replacingOccurrences(of: ",", with: "")) else {
-            delegate?.alertFieldEmpty()
+            delegate?.alertFieldInvalidate(message: "Preencha o campo de salário!")
             return
         }
         let discountsFormatted = discounts.dropFirst(2)
         if let discountDouble = Double(discountsFormatted.replacingOccurrences(of: ",", with: "")) {
             discount = discountDouble
         }
-        
-        if salaryDouble <= 0.0 {
-            delegate?.alertFieldEmpty()
+    
+        if salaryDouble <= 0.0  {
+            delegate?.alertFieldInvalidate(message: "Preencha o campo de salário!")
+        } else if discount >= salaryDouble {
+            delegate?.alertFieldInvalidate(message: "O desconto não pode ser igual ou superior ao salário.")
             return
         }
         self.salary = salaryDouble

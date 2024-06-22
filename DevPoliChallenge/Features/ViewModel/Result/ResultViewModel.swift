@@ -14,14 +14,15 @@ protocol ResultViewModelDelegate: AnyObject {
     
 }
 
-final class ResultViewModel {
+protocol ResultViewModelInput {
+    var delegate: ResultViewModelDelegate? {get set}
+    func verifyData(data: String, view: Any)
+}
+
+final class ResultViewModel: ResultViewModelInput {
     weak var delegate: ResultViewModelDelegate?
     
-    init(delegate: ResultViewModelDelegate?) {
-        self.delegate = delegate
-    }
-    
-    func verifyData(data: String, view: Any){
+    func verifyData(data: String, view: Any) {
         
         if data == "R$0.00" {
             delegate?.configValueEqualZero(view: view)

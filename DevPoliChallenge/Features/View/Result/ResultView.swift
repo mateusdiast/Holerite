@@ -13,7 +13,14 @@ protocol ResultViewDelegate: AnyObject{
     func sendDataToVerify(value: String, percentage: String, view: Any)
 }
 
-final class ResultView: UIView {
+protocol ResultViewInput {
+    var delegate: ResultViewDelegate? {get set}
+    func callTheActionVerify()
+    func configValueEqualZero(view: Any)
+    func configValueDifferentZero(view: Any)
+}
+
+final class ResultView: UIView, ResultViewInput {
     
     weak var delegate: ResultViewDelegate?
     
@@ -80,12 +87,8 @@ final class ResultView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func backButtonTapped(){
+    @objc private func backButtonTapped(){
         delegate?.backToPreviousView()
-    }
-    
-    func setData(data: [String]){
-        self.data = data
     }
     
     func callTheActionVerify(){

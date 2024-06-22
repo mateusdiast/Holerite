@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class CustomTextField: UITextField {
+final class CustomTextField: UITextField {
     
     private var placeHolderText: String
     

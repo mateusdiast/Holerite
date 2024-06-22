@@ -317,7 +317,7 @@
 		E5ED20D02B1EB37500C5296D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E5ED20D22B1EB39500C5296D /* ResultViewController */,
+				E5ED20D22B1EB39500C5296D /* Result */,
 				E5ED20D12B1EB38900C5296D /* Home */,
 			);
 			path = View;
@@ -332,14 +332,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		E5ED20D22B1EB39500C5296D /* ResultViewController */ = {
+		E5ED20D22B1EB39500C5296D /* Result */ = {
 			isa = PBXGroup;
 			children = (
 				E5ED20CE2B1EB17E00C5296D /* ResultViewController.swift */,
 				E5ED20D52B20062E00C5296D /* ResultView.swift */,
 				E5BB92FC2C1F0FE9009D3C54 /* ContainerResultView.swift */,
 			);
-			path = ResultViewController;
+			path = Result;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

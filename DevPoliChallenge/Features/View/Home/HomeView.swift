@@ -13,7 +13,13 @@ protocol HomeViewDelegate: AnyObject {
     func sendDataTyped(value: String, key: Int)
 }
 
-final class HomeView: UIView {
+protocol HomeViewInput {
+    func updateSalaryField(value: Double)
+    func updateDiscountField(value: Double)
+    var delegate: HomeViewDelegate? { get set }
+}
+
+final class HomeView: UIView, HomeViewInput {
     
     weak var delegate: HomeViewDelegate?
     
@@ -55,7 +61,7 @@ final class HomeView: UIView {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         button.layer.cornerRadius = 10
-        button.addTarget(self, action: #selector(nextViewTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(calculateButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -69,7 +75,7 @@ final class HomeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func nextViewTapped(){
+    @objc private func calculateButtonTapped(){
         delegate?.verifyDatas(salary: salaryField.text!, discounts: discountsField.text!)
     }
     

@@ -10,26 +10,28 @@ import UIKit
 
 final class HomeViewController: UIViewController {
     
-    private lazy var homeViewModel: HomeViewModel  = {
-        let viewModel = HomeViewModel(formatterSalary: FormatterSalary(),
-                                      formatterDiscount: FormatterSalary(),
-                                      inssCalculator: INSSCalculator(inss: INSSModel()),
-                                      irrfCalculator: IRRFCalculator(irrf: IRRFModel()),
-                                      salaryCalculator: SalaryCalculator(),
-                                      delegate: self)
-        return viewModel
-    }()
-
-    private let homeView = HomeView()
+    private var homeViewModel: HomeViewModelInput
+    private var homeView: HomeViewInput
+    
+    init(view: HomeViewInput, viewModel: HomeViewModelInput) {
+        homeViewModel = viewModel
+        homeView = view
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
         homeView.delegate = self
+        homeViewModel.delegate = self
     }
     
     override func loadView() {
-        self.view = homeView
+        self.view = homeView as? UIView
     }
     
 
@@ -61,12 +63,12 @@ extension HomeViewController: HomeViewModelDelegate {
     }
     
     func goToResult(values: [String]) {
-        let vc = ResultViewController(resultView: ResultView(data: values))
+        let vc = ResultViewController(resultView: ResultView(data: values), viewModel: ResultViewModel())
         self.present(vc, animated: true, completion: nil)
     }
     
-    func alertFieldEmpty() {
-        let alert = UIAlertController(title: "Error", message: "Preencha o campo de salário!", preferredStyle: UIAlertController.Style.alert)
+    func alertFieldInvalidate(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Tentar novamente!", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
@@ -79,7 +81,6 @@ extension HomeViewController: HomeViewDelegate {
     func sendDataTyped(value: String, key: Int) {
         homeViewModel.validadeDataTyped(value: value, key: key)
     }
-    
     
     
     func verifyDatas(salary: String, discounts: String){
