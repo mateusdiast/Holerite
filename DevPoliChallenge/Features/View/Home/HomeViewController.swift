@@ -34,7 +34,7 @@ final class HomeViewController: UIViewController {
         self.view = homeView as? UIView
     }
     
-
+    
     func setupNavigation(){
         navigationItem.title = "Holerite"
         let navigationBarAppearance = UINavigationBarAppearance()
@@ -53,17 +53,15 @@ extension HomeViewController: HomeViewModelDelegate {
         self.present(alert, animated: true)
     }
     
-    
-    func sendDataSalaryField(value: Double) {
-        homeView.updateSalaryField(value: value)
-    }
-    
-    func sendDataDiscountsField(value: Double) {
-        homeView.updateDiscountField(value: value)
-    }
-    
-    func goToResult(values: [String]) {
-        let vc = ResultViewController(resultView: ResultView(data: values), viewModel: ResultViewModel())
+    func goToResult(salary: ResultModel, discounts: ResultModel, discountINSS: ResultModel, discountIRRF: ResultModel, netSalary: ResultModel) {
+        let vc = ResultViewController(
+            resultView: ResultView(),
+            viewModel: ResultViewModel( salary: salary,
+                                        discount: discounts,
+                                        discountInss: discountINSS,
+                                        discountIrrf: discountIRRF,
+                                        netSalary: netSalary)
+        )
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -73,17 +71,11 @@ extension HomeViewController: HomeViewModelDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-
+    
 }
 
 extension HomeViewController: HomeViewDelegate {
-    
-    func sendDataTyped(value: String, key: Int) {
-        homeViewModel.validadeDataTyped(value: value, key: key)
-    }
-    
-    
-    func verifyDatas(salary: String, discounts: String){
+    func verifyDatas(salary: String?, discounts: String?){
         homeViewModel.verifyData(salary: salary, discounts: discounts)
     }
 }

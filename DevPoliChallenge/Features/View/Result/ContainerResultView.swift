@@ -8,20 +8,14 @@
 
 import UIKit
 
-protocol ContainerResultViewDelegate: AnyObject {
-    func sendDataToVerify(value: String, percentage: String, view: Any)
-}
-
 final class ContainerResultView: UIView {
     
-    weak var delegate: ContainerResultViewDelegate?
 
     private var value: String?
     private var percentage: String?
     private var color: UIColor
     
-    init(delegate: ContainerResultViewDelegate, color: UIColor) {
-        self.delegate = delegate
+    init(color: UIColor) {
         self.color = color
         super.init(frame: .zero)
         setup()
@@ -70,22 +64,7 @@ final class ContainerResultView: UIView {
         labelTitle.text = title
         labelValue.text = value
         labelPercentage.text = percentage + "%"
-        self.value = value
-        self.percentage = percentage
-    }
-    
-    func sendDataToVerify(){
-        delegate?.sendDataToVerify(value: value ?? "R$0.00", percentage: percentage ?? "0%", view: self)
-    }
-    
-    func setConfigValueEqualZero(){
-       labelValue.textColor = DesignSystem.Colors.secondary
-       labelValue.attributedText = value?.strikeThrough()
-       labelPercentage.textColor = DesignSystem.Colors.secondary
-    }
-    
-    func setConfigValueDifferentZero(){
-        labelValue.textColor = color
+        labelValue.setStyleTextLabel(value: value, color: color)
     }
     
     func setupPercetage(){

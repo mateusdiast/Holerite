@@ -16,11 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         let vc = HomeViewController(view: HomeView(), viewModel: HomeViewModel(
-            formatterSalary: FormatterSalary(),
-            formatterDiscount: FormatterSalary(),
-            inssCalculator: INSSCalculator(inss: INSSModel()),
-            irrfCalculator: IRRFCalculator(irrf: IRRFModel()),
-            salaryCalculator: SalaryCalculator()
+            calculator: Calculator(irrf: IRRFModel(), inss: INSSModel())
         ))
         window.rootViewController = UINavigationController(rootViewController: vc)
         window.makeKeyAndVisible()

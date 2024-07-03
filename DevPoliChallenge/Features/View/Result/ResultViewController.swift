@@ -29,7 +29,7 @@ final class ResultViewController: UIViewController {
         super.viewDidLoad()
         resultView.delegate = self
         viewModel.delegate = self
-        resultView.callTheActionVerify()
+        viewModel.loadResult()
     }
     
     override func loadView() {
@@ -39,22 +39,13 @@ final class ResultViewController: UIViewController {
 
 extension ResultViewController: ResultViewDelegate {
     
-    func sendDataToVerify(value: String, percentage: String, view: Any) {
-        viewModel.verifyData(data: value, view: view)
-    }
-    
     func backToPreviousView() {
         self.dismiss(animated: true)
     }
 }
 
 extension ResultViewController: ResultViewModelDelegate {
-    func configValueEqualZero(view: Any) {
-        resultView.configValueEqualZero(view: view)
+    func sendData(salary: ResultModel, discounts: ResultModel, discountINSS: ResultModel, discountIRRF: ResultModel, netSalary: ResultModel) {
+        resultView.setData(salary: salary, discounts: discounts, discountINSS: discountINSS, discountIRRF: discountIRRF, netSalary: netSalary)
     }
-    
-    func configValueDifferentZero(view: Any) {
-        resultView.configValueDifferentZero(view: view)
-    }
-  
 }

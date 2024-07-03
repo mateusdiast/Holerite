@@ -11,18 +11,13 @@ import UIKit
 
 final class CustomTextField: UITextField {
     
-    private var placeHolderText: String
-    
-    init(placeHolder: String) {
-        placeHolderText = placeHolder
-        super.init(frame: .zero)
+    private var placeHolderText: String?
+        
+    convenience init(placeHolder: String) {
+        self.init(frame: .zero)
+        self.placeHolderText = placeHolder
         viewConfig()
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }
 
 extension CustomTextField {

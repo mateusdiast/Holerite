@@ -12,4 +12,7 @@ import Foundation
 protocol Tribute {
     var value: Double? {get set}
     var percentage: Double? {get set}
+    var deduction: Double? {get set}
+    mutating func getData(salary: Double)
 }
+

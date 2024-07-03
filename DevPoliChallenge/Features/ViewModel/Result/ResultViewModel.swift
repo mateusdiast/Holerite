@@ -9,26 +9,38 @@
 import Foundation
 
 protocol ResultViewModelDelegate: AnyObject {
-    func configValueEqualZero(view: Any)
-    func configValueDifferentZero(view: Any)
+    func sendData(salary: ResultModel, discounts: ResultModel, discountINSS: ResultModel, discountIRRF: ResultModel, netSalary: ResultModel)
     
 }
 
 protocol ResultViewModelInput {
     var delegate: ResultViewModelDelegate? {get set}
-    func verifyData(data: String, view: Any)
+    func loadResult()
 }
 
 final class ResultViewModel: ResultViewModelInput {
     weak var delegate: ResultViewModelDelegate?
     
-    func verifyData(data: String, view: Any) {
-        
-        if data == "R$0.00" {
-            delegate?.configValueEqualZero(view: view)
-            return
-        }
-        delegate?.configValueDifferentZero(view: view)
-        
+    let salary: ResultModel
+    let discount: ResultModel
+    let discountInss: ResultModel
+    let discountIrrf: ResultModel
+    let netSalary: ResultModel
+    
+    init(salary: ResultModel,
+         discount: ResultModel,
+         discountInss: ResultModel,
+         discountIrrf: ResultModel,
+         netSalary: ResultModel) {
+        self.salary = salary
+        self.discount = discount
+        self.discountInss = discountInss
+        self.discountIrrf = discountIrrf
+        self.netSalary = netSalary
     }
+    
+    func loadResult(){
+        delegate?.sendData(salary: salary, discounts: discount, discountINSS: discountInss, discountIRRF: discountIrrf, netSalary: netSalary)
+    }
+    
 }

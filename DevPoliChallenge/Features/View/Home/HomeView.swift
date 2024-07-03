@@ -9,27 +9,16 @@
 import UIKit
 
 protocol HomeViewDelegate: AnyObject {
-    func verifyDatas(salary: String, discounts: String)
-    func sendDataTyped(value: String, key: Int)
+    func verifyDatas(salary: String?, discounts: String?)
 }
 
 protocol HomeViewInput {
-    func updateSalaryField(value: Double)
-    func updateDiscountField(value: Double)
     var delegate: HomeViewDelegate? { get set }
 }
 
 final class HomeView: UIView, HomeViewInput {
     
     weak var delegate: HomeViewDelegate?
-    
-    private lazy var currencyFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencySymbol = "R$"
-        formatter.maximumFractionDigits = 1
-        return formatter
-    }()
     
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
@@ -42,15 +31,21 @@ final class HomeView: UIView, HomeViewInput {
     
     private lazy var salaryField: UITextField = {
         let textField = CustomTextField(placeHolder: "Salário bruto")
-        textField.delegate = self
-        textField.tag = KeyTextField.salary.rawValue
+        textField.addAction(UIAction {_ in
+            if let text = textField.text?.currencyInputFormatting() {
+                textField.text = text
+            }
+        }, for: .editingChanged)
         return textField
     }()
     
     private lazy var discountsField: UITextField = {
         let textField = CustomTextField(placeHolder: "Descontos")
-        textField.delegate = self
-        textField.tag = KeyTextField.discounts.rawValue
+        textField.addAction(UIAction {_ in
+                if let text = textField.text?.currencyInputFormatting() {
+                    textField.text = text
+                }
+        }, for: .editingChanged)
         return textField
     }()
     
@@ -76,32 +71,8 @@ final class HomeView: UIView, HomeViewInput {
     }
     
     @objc private func calculateButtonTapped(){
-        delegate?.verifyDatas(salary: salaryField.text!, discounts: discountsField.text!)
+        delegate?.verifyDatas(salary: salaryField.text, discounts: discountsField.text)
     }
-    
-}
-
-extension HomeView {
-    func updateSalaryField(value: Double) {
-        let stringValue = currencyFormatter.string(from: value as NSNumber)
-        salaryField.text = stringValue
-    }
-    
-    func updateDiscountField(value: Double) {
-        let stringValue = currencyFormatter.string(from: value as NSNumber)
-        discountsField.text = stringValue
-    }
-}
-
-extension HomeView: UITextFieldDelegate {
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        delegate?.sendDataTyped(value: string, key: textField.tag)
-        return true
-        
-    }
-    
 }
 
 extension HomeView: ViewConfig {

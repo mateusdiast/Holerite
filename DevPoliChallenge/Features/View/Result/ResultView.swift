@@ -10,21 +10,16 @@ import UIKit
 
 protocol ResultViewDelegate: AnyObject{
     func backToPreviousView()
-    func sendDataToVerify(value: String, percentage: String, view: Any)
 }
 
 protocol ResultViewInput {
     var delegate: ResultViewDelegate? {get set}
-    func callTheActionVerify()
-    func configValueEqualZero(view: Any)
-    func configValueDifferentZero(view: Any)
+    func setData(salary: ResultModel, discounts: ResultModel, discountINSS: ResultModel, discountIRRF: ResultModel, netSalary: ResultModel)
 }
 
 final class ResultView: UIView, ResultViewInput {
     
     weak var delegate: ResultViewDelegate?
-    
-    private var data: [String] = []
     
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
@@ -35,7 +30,7 @@ final class ResultView: UIView, ResultViewInput {
         return view
     }()
     
-   private lazy var backButton: UIButton = {
+    private lazy var backButton: UIButton = {
         let button = UIButton()
         button.setTitle("FECHAR", for: .normal)
         button.setTitleColor(DesignSystem.Colors.backButtonColor, for: .normal)
@@ -45,40 +40,34 @@ final class ResultView: UIView, ResultViewInput {
         return button
     }()
     
-   private lazy var viewGrossSalary: ContainerResultView = {
-       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.accent)
-        view.setData(title: "Salário Bruno", value: data[3], percentage: "")
+    private lazy var viewGrossSalary: ContainerResultView = {
+        let view = ContainerResultView(color: DesignSystem.Colors.accent)
         return view as ContainerResultView
     }()
     
-   private lazy var viewDiscounts: ContainerResultView = {
-       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.tertiary)
-        view.setData(title: "Descontos", value: data[2], percentage: "")
+    private lazy var viewDiscounts: ContainerResultView = {
+        let view = ContainerResultView(color: DesignSystem.Colors.tertiary)
         return view as ContainerResultView
     }()
     
-   private lazy var viewINSSDiscounts: ContainerResultView = {
-       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.tertiary)
-        view.setData(title: "Desconto INSS", value: data[0], percentage: data[5])
+    private lazy var viewINSSDiscounts: ContainerResultView = {
+        let view = ContainerResultView(color: DesignSystem.Colors.tertiary)
         view.setupPercetage()
         return view
     }()
     
-   private lazy var viewIRRFDiscounts: ContainerResultView = {
-       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.tertiary)
-        view.setData(title: "Desconto IRRF", value: data[1], percentage: data[6])
+    private lazy var viewIRRFDiscounts: ContainerResultView = {
+        let view = ContainerResultView(color: DesignSystem.Colors.tertiary)
         view.setupPercetage()
         return view
     }()
     
-   private lazy var viewNetSalary: ContainerResultView = {
-       let view = ContainerResultView(delegate: self, color: DesignSystem.Colors.accent)
-        view.setData(title: "Salário liquido", value: data[4], percentage: "")
+    private lazy var viewNetSalary: ContainerResultView = {
+        let view = ContainerResultView(color: DesignSystem.Colors.accent)
         return view
     }()
     
-    init(data: [String]) {
-        self.data = data
+    init() {
         super.init(frame: .zero)
         setup()
     }
@@ -86,29 +75,18 @@ final class ResultView: UIView, ResultViewInput {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     @objc private func backButtonTapped(){
         delegate?.backToPreviousView()
     }
     
-    func callTheActionVerify(){
-        viewGrossSalary.sendDataToVerify()
-        viewDiscounts.sendDataToVerify()
-        viewNetSalary.sendDataToVerify()
-        viewINSSDiscounts.sendDataToVerify()
-        viewIRRFDiscounts.sendDataToVerify()
-    }
     
-    func configValueEqualZero(view: Any){
-        if let view = view as? ContainerResultView {
-            view.setConfigValueEqualZero()
-        }
-    }
-    
-    func configValueDifferentZero(view: Any) {
-        if let view = view as? ContainerResultView {
-            view.setConfigValueDifferentZero()
-        }
+    func setData(salary: ResultModel, discounts: ResultModel, discountINSS: ResultModel, discountIRRF: ResultModel, netSalary: ResultModel) {
+        viewGrossSalary.setData(title: salary.name, value: String(salary.value).currencyFormatting(), percentage: "")
+        viewDiscounts.setData(title: discounts.name, value: String(discounts.value).currencyFormatting(), percentage: "")
+        viewIRRFDiscounts.setData(title: discountIRRF.name, value: String(discountIRRF.value).currencyFormatting(), percentage: String(format: "%.0f", discountIRRF.porcentage ?? 0.0))
+        viewINSSDiscounts.setData(title: discountINSS.name, value: String(discountINSS.value).currencyFormatting(), percentage: String(format: "%.0f", discountINSS.porcentage ?? 0.0))
+        viewNetSalary.setData(title: netSalary.name, value: String(netSalary.value).currencyFormatting(), percentage: "")
     }
     
 }
@@ -144,8 +122,3 @@ extension ResultView: ViewConfig {
     
 }
 
-extension ResultView: ContainerResultViewDelegate {
-    func sendDataToVerify(value: String, percentage: String, view: Any) {
-        delegate?.sendDataToVerify(value: value, percentage: percentage, view: view)
-    }
-}

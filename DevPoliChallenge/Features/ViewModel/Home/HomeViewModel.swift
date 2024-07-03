@@ -9,60 +9,46 @@
 import Foundation
 
 protocol HomeViewModelDelegate: AnyObject {
-    func goToResult(values: [String])
+    func goToResult(salary: ResultModel, discounts: ResultModel, discountINSS: ResultModel, discountIRRF: ResultModel, netSalary: ResultModel)
     func alertFieldInvalidate(message: String)
-    func sendDataSalaryField(value: Double)
-    func sendDataDiscountsField(value: Double)
     func alertDataInvalid()
 }
 
 protocol HomeViewModelInput {
     var delegate: HomeViewModelDelegate? {get set}
-    func verifyData(salary: String, discounts: String)
-    func validadeDataTyped(value: String, key: Int)
+    func verifyData(salary: String?, discounts: String?)
 }
 
 final class HomeViewModel: HomeViewModelInput {
     
     weak var delegate: HomeViewModelDelegate?
     
-    private var formatterSalary: Formatter
-    private var formatterDiscount: Formatter
-    private var inssCalculator: Calculator
-    private var irrfCalculator: Calculator
-    private var salaryCalculator: Calculator
     private var inss: Tribute?
     private var irrf: Tribute?
     private var netSalary: Double = 0.0
     private var salary: Double = 0.0
     private var discount: Double = 0.0
-    private var values: [String] = []
+    private var calculator: CalculatorInput
     
     
-    
-    init(formatterSalary: Formatter,
-         formatterDiscount: Formatter,
-         inssCalculator: Calculator,
-         irrfCalculator: Calculator,
-         salaryCalculator: Calculator) {
-        self.formatterSalary = formatterSalary
-        self.formatterDiscount = formatterDiscount
-        self.inssCalculator = inssCalculator
-        self.irrfCalculator = irrfCalculator
-        self.salaryCalculator = salaryCalculator
+    init(calculator: CalculatorInput) {
+        self.calculator = calculator
     }
     
-    func verifyData(salary: String, discounts: String) {
-        let salaryFormatted = salary.dropFirst(2)
-        guard let salaryDouble = Double(salaryFormatted.replacingOccurrences(of: ",", with: "")) else {
+    func verifyData(salary: String?, discounts: String?) {
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        
+        guard let salaryDouble = numberFormatter.number(from: salary ?? "" ) as? Double  else {
             delegate?.alertFieldInvalidate(message: "Preencha o campo de salário!")
             return
         }
-        let discountsFormatted = discounts.dropFirst(2)
-        if let discountDouble = Double(discountsFormatted.replacingOccurrences(of: ",", with: "")) {
+        
+        if let discountDouble = numberFormatter.number(from: discounts ?? "" ) as? Double {
             discount = discountDouble
         }
-    
+        
         if salaryDouble <= 0.0  {
             delegate?.alertFieldInvalidate(message: "Preencha o campo de salário!")
         } else if discount >= salaryDouble {
@@ -78,22 +64,19 @@ final class HomeViewModel: HomeViewModelInput {
 
 extension HomeViewModel {
     
-    private func convertToString() {
-        values.removeAll()
-        values.append(formatToNumberStyle(inss?.value ?? 0.0))
-        values.append(formatToNumberStyle(irrf?.value ?? 0.0))
-        values.append(formatToNumberStyle(discount))
-        values.append(formatToNumberStyle(salary))
-        values.append(formatToNumberStyle(netSalary))
-        values.append(String(format: "%.0f", inss?.percentage ?? 0.0))
-        values.append(String(format: "%.0f", irrf?.percentage ?? 0.0))
-    }
-    
-    private func formatToNumberStyle(_ value: Double) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencySymbol = "R$"
-        return formatter.string(from: value as NSNumber)!
+    private func sendData() {
+        let salary = ResultModel(name: "Salário Bruto", value: salary, porcentage: nil)
+        let discount = ResultModel(name: "Descontos", value: discount, porcentage: nil)
+        let discountInss = ResultModel(name: "Desconto INSS", value: inss?.value ?? 0.0, porcentage: inss?.percentage ?? 0.0)
+        let discountIrrf = ResultModel(name: "Desconto IRRF", value: irrf?.value ?? 0.0, porcentage: irrf?.percentage ?? 0.0)
+        let netSalary  = ResultModel(name: "Salário líquido", value: netSalary, porcentage: nil)
+        delegate?.goToResult(
+            salary: salary,
+            discounts: discount,
+            discountINSS: discountInss,
+            discountIRRF: discountIrrf,
+            netSalary: netSalary
+        )
     }
 }
 
@@ -105,68 +88,26 @@ extension HomeViewModel {
         calculateINSS()
         calculateIRRF()
         calculateNetSalary()
-        convertToString()
-        delegate?.goToResult(values: values)
+        sendData()
     }
     
     private func calculateINSS() {
-        let result = inssCalculator.calculate(value: salary)
-        inss = result as? Tribute
+        let result = calculator.calculateINSS(value: salary)
+        inss = result
     }
     
     private func calculateIRRF() {
-        let irrfInput = irrfCalculator as? InputIRRFValue
-        if let inss = inss {
-            irrfInput?.setINSSValue(inssValue: inss)
-        }
-        let irrfCalculate = irrfInput as? Calculator
-        let irrfResult = irrfCalculate?.calculate(value: salary)
-        irrf = irrfResult as? Tribute
+        let result = calculator.calculateIRRF(value: salary, discount: discount)
+        irrf = result
     }
     
     private func calculateNetSalary() {
-        let salaryInput = salaryCalculator as? InputSalaryValue
-        salaryInput?.setValues(discount: discount, inss: inss, irrf: irrf)
-        let salaryCalculate = salaryInput as? Calculator
-        if let result = salaryCalculate?.calculate(value: salary) as? Double {
-            netSalary = result
-        }
+        let result = calculator.calculateNetSalary(value: salary, discount: discount)
+        netSalary = result
     }
 }
 
-// MARK: FORMAT TEXTFIELD
 
-extension HomeViewModel {
-    
-    func validadeDataTyped(value: String, key: Int) {
-        let valueTapped = value.range(of: NumberRegex.numberValue, options: .regularExpression)
-        
-        if valueTapped != nil {
-            formatValues(value: value, key: key)
-            return
-        }
-        
-        delegate?.alertDataInvalid()
-    }
-    
-    private func formatValues(value: String, key: Int) {
-        
-        let keyCases = KeyTextField(rawValue: key)
-
-        switch keyCases {
-        case .salary:
-            let resultValue = formatterSalary.format(value: value)
-            delegate?.sendDataSalaryField(value: resultValue)
-        case .discounts:
-            let resultValue = formatterDiscount.format(value: value)
-            delegate?.sendDataDiscountsField(value: resultValue)
-            
-        default:
-            return
-        }
-        
-    }
-}
 
 
 
