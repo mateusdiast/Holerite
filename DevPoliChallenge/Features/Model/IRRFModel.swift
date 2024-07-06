@@ -14,6 +14,10 @@ struct IRRFModel: Tribute {
     var deduction: Double?
     
     mutating func getData(salary: Double) {
+        if salary < 0 {
+            percentage = 0.0
+            return
+        }
         switch salary{
         case 0...2259.20:
             percentage = 0.0

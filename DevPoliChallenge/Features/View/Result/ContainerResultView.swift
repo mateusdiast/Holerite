@@ -60,10 +60,11 @@ final class ContainerResultView: UIView {
         return label
     }()
     
+    
     func setData(title: String, value: String, percentage: String){
         labelTitle.text = title
         labelValue.text = value
-        labelPercentage.text = percentage + "%"
+        labelPercentage.text = percentage
         labelValue.setStyleTextLabel(value: value, color: color)
     }
     
