@@ -13,14 +13,16 @@ struct INSSModel: Tribute {
     var percentage: Double?
     var deduction: Double?
 
-    mutating func getData(salary: Double) {
+    mutating func setData(salary: Double) {
         if salary < 0 {
             percentage = 0.0
+            deduction = 0.0
             return
         }
         switch salary {
         case 0.0...1411.99:
             percentage = 0.0
+            deduction = 0.0
         case 1412.00:
             percentage = 7.5
             deduction = 0.0

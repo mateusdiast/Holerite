@@ -9,7 +9,7 @@
 import Foundation
 
 struct ResultModel {
-    let name: String
-    let value: Double
-    let porcentage: Double?
+    var name: String
+    var value: Double
+    var porcentage: Double?
 }

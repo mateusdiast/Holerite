@@ -14,42 +14,50 @@ final class TestIRRFModel: XCTestCase {
     
     func test_getData_inputNegativeValue_OutputZeroPercentage(){
         let input: Double = -1.0
-        let expected: Double = 0
+        let expectedPercentage: Double = 0.0
+        let expectedDeduction: Double = 0.0
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
-        XCTAssertEqual(result.percentage, expected)
+        XCTAssertEqual(result.percentage, expectedPercentage)
+        XCTAssertEqual(result.deduction, expectedDeduction)
     }
     
     func test_getData_rangeOne_inputMinValue_OutputValue(){
         let input: Double = 0.0
-        let expected: Double = 0
+        let expectedPercentage: Double = 0.0
+        let expectedDeduction: Double = 0.0
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
-        XCTAssertEqual(result.percentage, expected)
+        XCTAssertEqual(result.percentage, expectedPercentage)
+        XCTAssertEqual(result.deduction, expectedDeduction)
     }
 
     func test_getData_rangeOne_inputMediumValue_OutputValue(){
         let input: Double = 1129.60
-        let expected: Double = 0
+        let expectedPercentage: Double = 0.0
+        let expectedDeduction: Double = 0.0
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
-        XCTAssertEqual(result.percentage, expected)
+        XCTAssertEqual(result.percentage, expectedPercentage)
+        XCTAssertEqual(result.deduction, expectedDeduction)
     }
     
     func test_getData_rangeOne_inputMaxValue_OutputValue(){
         let input: Double = 2259.20
-        let expected: Double = 0
+        let expectedPercentage: Double = 0.0
+        let expectedDeduction: Double = 0.0
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
-        XCTAssertEqual(result.percentage, expected)
+        XCTAssertEqual(result.percentage, expectedPercentage)
+        XCTAssertEqual(result.deduction, expectedDeduction)
     }
     
     func test_getData_rangeTwo_inputMinValue_OutputValue(){
@@ -58,7 +66,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 169.44
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)
@@ -70,7 +78,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 169.44
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)
@@ -82,7 +90,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 169.44
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)
@@ -94,7 +102,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 381.44
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)
@@ -106,7 +114,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 381.44
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)
@@ -118,7 +126,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 381.44
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)
@@ -130,7 +138,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 662.77
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)
@@ -142,7 +150,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 662.77
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)
@@ -154,7 +162,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 662.77
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)
@@ -166,7 +174,7 @@ final class TestIRRFModel: XCTestCase {
         let expectedDeduction: Double = 896.00
         var result = IRRFModel()
         
-        result.getData(salary: input)
+        result.setData(salary: input)
         
         XCTAssertEqual(result.percentage, expectedPercentage)
         XCTAssertEqual(result.deduction, expectedDeduction)

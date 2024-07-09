@@ -25,7 +25,7 @@ final class Calculator: CalculatorInput {
     }
     
     func calculateINSS(value: Double) -> Tribute {
-        inss.getData(salary: value)
+        inss.setData(salary: value)
         inss.value = ((value / 100) * (inss.percentage ?? 0)) - (inss.deduction ?? 0.0)
         if (inss.value ?? 0.0) > 908.86 {
             inss.value = 908.86
@@ -35,7 +35,7 @@ final class Calculator: CalculatorInput {
     
     func calculateIRRF(value: Double, discount: Double) -> Tribute {
         let salaryWithDiscounts = value - (inss.value ?? 0.0) - discount
-        irrf.getData(salary: salaryWithDiscounts)
+        irrf.setData(salary: salaryWithDiscounts)
         irrf.value = ((salaryWithDiscounts / 100) * (irrf.percentage ?? 0.0)) - (irrf.deduction ?? 0.0)
         return irrf
     }
