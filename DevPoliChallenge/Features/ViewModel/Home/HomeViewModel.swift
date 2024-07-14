@@ -23,11 +23,11 @@ final class HomeViewModel: HomeViewModelInput {
     
     weak var delegate: HomeViewModelDelegate?
     
-    private var inss: Tribute?
-    private var irrf: Tribute?
-    private var netSalary: Double = 0.0
-    private var salary: Double = 0.0
-    private var discount: Double = 0.0
+    var inss: Tribute?
+    var irrf: Tribute?
+    var netSalary: Double = 0.0
+    var salary: Double = 0.0
+    var discount: Double = 0.0
     private var calculator: CalculatorInput
     
     
@@ -46,11 +46,14 @@ final class HomeViewModel: HomeViewModelInput {
         }
         
         if let discountDouble = numberFormatter.number(from: discounts ?? "" ) as? Double {
-            discount = discountDouble
+            if discountDouble > 0.0 {
+                discount = discountDouble
+            }
         }
         
         if salaryDouble <= 0.0  {
             delegate?.alertFieldInvalidate(message: "Preencha o campo de salário!")
+            return
         } else if discount >= salaryDouble {
             delegate?.alertFieldInvalidate(message: "O desconto não pode ser igual ou superior ao salário.")
             return
