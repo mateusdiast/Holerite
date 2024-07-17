@@ -43,6 +43,11 @@
 		E5ED20CF2B1EB17E00C5296D /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED20CE2B1EB17E00C5296D /* ResultViewController.swift */; };
 		E5ED20D42B1EB57100C5296D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED20D32B1EB57100C5296D /* HomeViewModel.swift */; };
 		E5ED20D62B20062E00C5296D /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5ED20D52B20062E00C5296D /* ResultView.swift */; };
+		E5FB57B32C472708005AB15C /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = E5FB57B22C472708005AB15C /* InlineSnapshotTesting */; };
+		E5FB57B52C472708005AB15C /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = E5FB57B42C472708005AB15C /* SnapshotTesting */; };
+		E5FB57B92C47278C005AB15C /* TestHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FB57B82C47278C005AB15C /* TestHomeViewController.swift */; };
+		E5FB57C02C473B79005AB15C /* TestResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FB57BF2C473B79005AB15C /* TestResultViewController.swift */; };
+		E5FB57C22C473C9D005AB15C /* DummyResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FB57C12C473C9D005AB15C /* DummyResultViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +101,9 @@
 		E5ED20CE2B1EB17E00C5296D /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		E5ED20D32B1EB57100C5296D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E5ED20D52B20062E00C5296D /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		E5FB57B82C47278C005AB15C /* TestHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHomeViewController.swift; sourceTree = "<group>"; };
+		E5FB57BF2C473B79005AB15C /* TestResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultViewController.swift; sourceTree = "<group>"; };
+		E5FB57C12C473C9D005AB15C /* DummyResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyResultViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5FB57B32C472708005AB15C /* InlineSnapshotTesting in Frameworks */,
+				E5FB57B52C472708005AB15C /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +228,7 @@
 		E57C1F222C36244600E24C41 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				E5FB57B62C472752005AB15C /* View */,
 				E5DE6AC32C3B602200804EDF /* ViewModels */,
 				E57C1F2A2C38D48B00E24C41 /* Core */,
 				E57C1F252C38B7AF00E24C41 /* Models */,
@@ -229,10 +240,12 @@
 		E57C1F232C36244D00E24C41 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E5FB57BA2C472860005AB15C /* Scene */,
 				E5DE6ADE2C3E004400804EDF /* Calculator */,
 				E5DE6ACE2C3B648200804EDF /* Delegates */,
 				E538FDE82C39A3BA00E7E4B8 /* StubTributeModel.swift */,
 				E5DE6ADA2C3DF88100804EDF /* SpyHomeViewModel.swift */,
+				E5FB57C12C473C9D005AB15C /* DummyResultViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -410,6 +423,38 @@
 			path = Result;
 			sourceTree = "<group>";
 		};
+		E5FB57B62C472752005AB15C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E5FB57BE2C473B5E005AB15C /* Result */,
+				E5FB57B72C472769005AB15C /* Home */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E5FB57B72C472769005AB15C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E5FB57B82C47278C005AB15C /* TestHomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E5FB57BA2C472860005AB15C /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		E5FB57BE2C473B5E005AB15C /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				E5FB57BF2C473B79005AB15C /* TestResultViewController.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -444,6 +489,10 @@
 				E57C1F1E2C361CA800E24C41 /* PBXTargetDependency */,
 			);
 			name = "DevPoliChallenge-HoleriteTests";
+			packageProductDependencies = (
+				E5FB57B22C472708005AB15C /* InlineSnapshotTesting */,
+				E5FB57B42C472708005AB15C /* SnapshotTesting */,
+			);
 			productName = "DevPoliChallenge-HoleriteTests";
 			productReference = E57C1F192C361CA800E24C41 /* DevPoliChallenge-HoleriteTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -477,6 +526,9 @@
 				Base,
 			);
 			mainGroup = 4C3862972A758819005C9C3B;
+			packageReferences = (
+				E5FB57B12C472708005AB15C /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			productRefGroup = 4C3862A12A758819005C9C3B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -543,10 +595,13 @@
 				E5DE6ADD2C3DFDEE00804EDF /* SpyHomeViewModelDelegate.swift in Sources */,
 				E57C1F272C38B7D500E24C41 /* TestINSSModel.swift in Sources */,
 				E5DE6AD02C3B649B00804EDF /* SpyResultViewModelDelegate.swift in Sources */,
+				E5FB57C02C473B79005AB15C /* TestResultViewController.swift in Sources */,
+				E5FB57C22C473C9D005AB15C /* DummyResultViewModel.swift in Sources */,
 				E57C1F1C2C361CA800E24C41 /* StringFormatterTests.swift in Sources */,
 				E538FDE92C39A3BA00E7E4B8 /* StubTributeModel.swift in Sources */,
 				E57C1F292C38CA4600E24C41 /* TestIRRFModel.swift in Sources */,
 				E5DE6AD52C3CC53700804EDF /* DummyCalculator.swift in Sources */,
+				E5FB57B92C47278C005AB15C /* TestHomeViewController.swift in Sources */,
 				E5DE6AC52C3B603E00804EDF /* TestResultViewModel.swift in Sources */,
 				E5DE6AE02C3E006000804EDF /* SpyCalculator.swift in Sources */,
 				E538FDED2C39A63300E7E4B8 /* TestCalculator.swift in Sources */,
@@ -829,6 +884,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E5FB57B12C472708005AB15C /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.17.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E5FB57B22C472708005AB15C /* InlineSnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5FB57B12C472708005AB15C /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = InlineSnapshotTesting;
+		};
+		E5FB57B42C472708005AB15C /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5FB57B12C472708005AB15C /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4C3862982A758819005C9C3B /* Project object */;
 }

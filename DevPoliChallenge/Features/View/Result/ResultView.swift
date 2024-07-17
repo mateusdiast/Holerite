@@ -84,8 +84,8 @@ final class ResultView: UIView, ResultViewInput {
     func setData(salary: ResultModel, discounts: ResultModel, discountINSS: ResultModel, discountIRRF: ResultModel, netSalary: ResultModel) {
         viewGrossSalary.setData(title: salary.name, value: String(salary.value).currencyFormatting(), percentage: "")
         viewDiscounts.setData(title: discounts.name, value: String(discounts.value).currencyFormatting(), percentage: "")
-        viewIRRFDiscounts.setData(title: discountIRRF.name, value: String(discountIRRF.value).currencyFormatting(), percentage: String(format: "%.0f%", discountIRRF.porcentage ?? 0.0))
-        viewINSSDiscounts.setData(title: discountINSS.name, value: String(discountINSS.value).currencyFormatting(), percentage: String(format: "%.0f%", discountINSS.porcentage ?? 0.0))
+        viewIRRFDiscounts.setData(title: discountIRRF.name, value: String(discountIRRF.value).currencyFormatting(), percentage: String(format: "%.0f%%", discountIRRF.porcentage ?? 0.0))
+        viewINSSDiscounts.setData(title: discountINSS.name, value: String(discountINSS.value).currencyFormatting(), percentage: String(format: "%.0f%%", discountINSS.porcentage ?? 0.0))
         viewNetSalary.setData(title: netSalary.name, value: String(netSalary.value).currencyFormatting(), percentage: "")
     }
     

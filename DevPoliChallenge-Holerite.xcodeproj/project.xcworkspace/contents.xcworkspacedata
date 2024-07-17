@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/policante/Documents/project/Challenges/DevPoliChallenge/DevPoliChallenge-Holerite.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>
