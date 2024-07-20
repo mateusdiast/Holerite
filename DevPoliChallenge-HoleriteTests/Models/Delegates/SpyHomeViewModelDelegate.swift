@@ -15,6 +15,7 @@ final class SpyHomeViewModelDelegate: HomeViewModelDelegate {
    
     private(set) var alertFieldInvalidateIsCalled: Bool = false
     private(set) var sendDataIsCalled: Bool = false
+    private(set) var messageIsCalled: String = ""
     
     func goToResult(salary: DevPoliChallenge_Holerite.ResultModel, discounts: DevPoliChallenge_Holerite.ResultModel, discountINSS: DevPoliChallenge_Holerite.ResultModel, discountIRRF: DevPoliChallenge_Holerite.ResultModel, netSalary: DevPoliChallenge_Holerite.ResultModel) {
         sendDataIsCalled = true
@@ -22,6 +23,7 @@ final class SpyHomeViewModelDelegate: HomeViewModelDelegate {
     
     func alertFieldInvalidate(message: String) {
         alertFieldInvalidateIsCalled = true
+        messageIsCalled = message
     }
     
     func alertDataInvalid() {

@@ -35,7 +35,6 @@
 		E5DE6AC52C3B603E00804EDF /* TestResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DE6AC42C3B603E00804EDF /* TestResultViewModel.swift */; };
 		E5DE6AD02C3B649B00804EDF /* SpyResultViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DE6ACF2C3B649B00804EDF /* SpyResultViewModelDelegate.swift */; };
 		E5DE6AD32C3CC4A700804EDF /* TestHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DE6AD22C3CC4A700804EDF /* TestHomeViewModel.swift */; };
-		E5DE6AD52C3CC53700804EDF /* DummyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DE6AD42C3CC53700804EDF /* DummyCalculator.swift */; };
 		E5DE6ADB2C3DF88100804EDF /* SpyHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DE6ADA2C3DF88100804EDF /* SpyHomeViewModel.swift */; };
 		E5DE6ADD2C3DFDEE00804EDF /* SpyHomeViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DE6ADC2C3DFDEE00804EDF /* SpyHomeViewModelDelegate.swift */; };
 		E5DE6AE02C3E006000804EDF /* SpyCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DE6ADF2C3E006000804EDF /* SpyCalculator.swift */; };
@@ -93,7 +92,6 @@
 		E5DE6AC42C3B603E00804EDF /* TestResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultViewModel.swift; sourceTree = "<group>"; };
 		E5DE6ACF2C3B649B00804EDF /* SpyResultViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyResultViewModelDelegate.swift; sourceTree = "<group>"; };
 		E5DE6AD22C3CC4A700804EDF /* TestHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHomeViewModel.swift; sourceTree = "<group>"; };
-		E5DE6AD42C3CC53700804EDF /* DummyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyCalculator.swift; sourceTree = "<group>"; };
 		E5DE6ADA2C3DF88100804EDF /* SpyHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyHomeViewModel.swift; sourceTree = "<group>"; };
 		E5DE6ADC2C3DFDEE00804EDF /* SpyHomeViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyHomeViewModelDelegate.swift; sourceTree = "<group>"; };
 		E5DE6ADF2C3E006000804EDF /* SpyCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyCalculator.swift; sourceTree = "<group>"; };
@@ -389,7 +387,6 @@
 		E5DE6ADE2C3E004400804EDF /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				E5DE6AD42C3CC53700804EDF /* DummyCalculator.swift */,
 				E5DE6ADF2C3E006000804EDF /* SpyCalculator.swift */,
 			);
 			path = Calculator;
@@ -600,7 +597,6 @@
 				E57C1F1C2C361CA800E24C41 /* StringFormatterTests.swift in Sources */,
 				E538FDE92C39A3BA00E7E4B8 /* StubTributeModel.swift in Sources */,
 				E57C1F292C38CA4600E24C41 /* TestIRRFModel.swift in Sources */,
-				E5DE6AD52C3CC53700804EDF /* DummyCalculator.swift in Sources */,
 				E5FB57B92C47278C005AB15C /* TestHomeViewController.swift in Sources */,
 				E5DE6AC52C3B603E00804EDF /* TestResultViewModel.swift in Sources */,
 				E5DE6AE02C3E006000804EDF /* SpyCalculator.swift in Sources */,

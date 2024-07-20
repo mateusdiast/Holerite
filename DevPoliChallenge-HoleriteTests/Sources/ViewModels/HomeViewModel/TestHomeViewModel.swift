@@ -17,7 +17,7 @@ final class TestHomeViewModel: XCTestCase {
     func test_verifyData_SalaryIsConvertedToDoubleAndIsHighThenZero_sucessfulCase(){
         let inputSalary: String = "R$ 1.324,00"
         let expectedSalary: Double = 1324
-        let calculator = DummyCalculator()
+        let calculator = SpyCalculator()
         let viewModel = HomeViewModel(calculator: calculator)
         
         viewModel.verifyData(salary: inputSalary, discounts: "")
@@ -27,7 +27,8 @@ final class TestHomeViewModel: XCTestCase {
     
     func test_verifyData_SalaryIsFailToConvertedToDoubleAndCalledTheAlertFieldInvalidate_failCase(){
         let inputSalary: String = ""
-        let calculator = DummyCalculator()
+        let expectedMessage: String = "Preencha o campo de salário!"
+        let calculator = SpyCalculator()
         let viewModel = HomeViewModel(calculator: calculator)
         let delegate = SpyHomeViewModelDelegate()
         viewModel.delegate = delegate
@@ -35,11 +36,13 @@ final class TestHomeViewModel: XCTestCase {
         viewModel.verifyData(salary: inputSalary, discounts: "")
         
         XCTAssertTrue(delegate.alertFieldInvalidateIsCalled)
+        XCTAssertEqual(expectedMessage, delegate.messageIsCalled)
     }
     
     func test_verifyData_SalaryIsEqualToZeroAndCalledTheAlertFieldInvalidate_failCase(){
         let inputSalary: String = "R$ 0,00"
-        let calculator = DummyCalculator()
+        let expectedMessage: String = "Preencha o campo de salário!"
+        let calculator = SpyCalculator()
         let viewModel = HomeViewModel(calculator: calculator)
         let delegate = SpyHomeViewModelDelegate()
         viewModel.delegate = delegate
@@ -47,11 +50,13 @@ final class TestHomeViewModel: XCTestCase {
         viewModel.verifyData(salary: inputSalary, discounts: "")
         
         XCTAssertTrue(delegate.alertFieldInvalidateIsCalled)
+        XCTAssertEqual(expectedMessage, delegate.messageIsCalled)
     }
     
     func test_verifyData_SalaryIsNegativeAndCalledTheAlertFieldInvalidate_failCase(){
         let inputSalary: String = "R$ -345,00"
-        let calculator = DummyCalculator()
+        let expectedMessage: String = "Preencha o campo de salário!"
+        let calculator = SpyCalculator()
         let viewModel = HomeViewModel(calculator: calculator)
         let delegate = SpyHomeViewModelDelegate()
         viewModel.delegate = delegate
@@ -59,13 +64,14 @@ final class TestHomeViewModel: XCTestCase {
         viewModel.verifyData(salary: inputSalary, discounts: "")
         
         XCTAssertTrue(delegate.alertFieldInvalidateIsCalled)
+        XCTAssertEqual(expectedMessage, delegate.messageIsCalled)
     }
     
     func test_verifyData_DiscountIsNegative_outputIsZero(){
         let inputSalary: String = "R$ 1235,00"
         let inputDiscount: String = "R$ -123,00"
         let expected: Double = 0.0
-        let calculator = DummyCalculator()
+        let calculator = SpyCalculator()
         let viewModel = HomeViewModel(calculator: calculator)
         let delegate = SpyHomeViewModelDelegate()
         viewModel.delegate = delegate
@@ -79,7 +85,7 @@ final class TestHomeViewModel: XCTestCase {
         let inputSalary: String = "R$ 1235,00"
         let inputDiscount: String = "R$ 123,00"
         let expected: Double = 123.00
-        let calculator = DummyCalculator()
+        let calculator = SpyCalculator()
         let viewModel = HomeViewModel(calculator: calculator)
         let delegate = SpyHomeViewModelDelegate()
         viewModel.delegate = delegate
@@ -94,7 +100,8 @@ final class TestHomeViewModel: XCTestCase {
     func test_verifyData_DiscountIsEqualThenSalaryAndCalledTheAlertFieldInvalidate_failCase(){
         let inputSalary: String = "R$ 123,00"
         let inputDiscount: String = "R$ 123,00"
-        let calculator = DummyCalculator()
+        let expectedMessage: String = "O desconto não pode ser igual ou superior ao salário."
+        let calculator = SpyCalculator()
         let viewModel = HomeViewModel(calculator: calculator)
         let delegate = SpyHomeViewModelDelegate()
         viewModel.delegate = delegate
@@ -102,12 +109,14 @@ final class TestHomeViewModel: XCTestCase {
         viewModel.verifyData(salary: inputSalary, discounts: inputDiscount)
         
         XCTAssertTrue(delegate.alertFieldInvalidateIsCalled)
+        XCTAssertEqual(expectedMessage, delegate.messageIsCalled)
     }
     
     func test_verifyData_DiscountIsBigThenSalaryAndCalledTheAlertFieldInvalidate_failCase(){
         let inputSalary: String = "R$ 123,00"
         let inputDiscount: String = "R$ 123,44"
-        let calculator = DummyCalculator()
+        let expectedMessage: String = "O desconto não pode ser igual ou superior ao salário."
+        let calculator = SpyCalculator()
         let viewModel = HomeViewModel(calculator: calculator)
         let delegate = SpyHomeViewModelDelegate()
         viewModel.delegate = delegate
@@ -115,9 +124,11 @@ final class TestHomeViewModel: XCTestCase {
         viewModel.verifyData(salary: inputSalary, discounts: inputDiscount)
         
         XCTAssertTrue(delegate.alertFieldInvalidateIsCalled)
+        XCTAssertEqual(expectedMessage, delegate.messageIsCalled)
+
     }
     
-    func test_calculateINSS_calculateINSSFromCalculatorIsCalled(){
+    func test_calculateINSS_calculateINSSFromCalculatorIsCalledAndIfINSSObjectIsSetted(){
         let inputSalary: String = "R$ 1235,00"
         let inputDiscount: String = "R$ 123,00"
         let calculator = SpyCalculator()
@@ -126,20 +137,11 @@ final class TestHomeViewModel: XCTestCase {
         viewModel.verifyData(salary: inputSalary, discounts: inputDiscount)
         
         XCTAssertTrue(calculator.calculateINSSIsCalled)
-    }
-    
-    func test_calculateINSS_testIfTheInssObjectIsSetted(){
-        let inputSalary: String = "R$ 1235,00"
-        let inputDiscount: String = "R$ 123,00"
-        let calculator = DummyCalculator()
-        let viewModel = HomeViewModel(calculator: calculator)
-        
-        viewModel.verifyData(salary: inputSalary, discounts: inputDiscount)
-        
         XCTAssertNotNil(viewModel.inss)
     }
     
-    func test_calculateIRRF_calculateIRRFFromCalculatorIsCalled(){
+    
+    func test_calculateIRRF_calculateIRRFFromCalculatorIsCalledAndIfIRRFObjectIsSetted(){
         let inputSalary: String = "R$ 1235,00"
         let inputDiscount: String = "R$ 123,00"
         let calculator = SpyCalculator()
@@ -148,20 +150,10 @@ final class TestHomeViewModel: XCTestCase {
         viewModel.verifyData(salary: inputSalary, discounts: inputDiscount)
         
         XCTAssertTrue(calculator.calculateIRRFIsCalled)
+        XCTAssertNotNil(viewModel.inss)
     }
     
-    func test_calculateIRRF_testIfTheIrrfObjectIsSetted(){
-        let inputSalary: String = "R$ 1235,00"
-        let inputDiscount: String = "R$ 123,00"
-        let calculator = DummyCalculator()
-        let viewModel = HomeViewModel(calculator: calculator)
-        
-        viewModel.verifyData(salary: inputSalary, discounts: inputDiscount)
-        
-        XCTAssertNotNil(viewModel.irrf)
-    }
-    
-    func test_calculateNetSalary_calculateNetSalaryfromCalculatorIsCalled(){
+    func test_calculateNetSalary_calculateNetSalaryfromCalculatorIsCalledAndIfNetSalaryValueIsSetted(){
         let inputSalary: String = "R$ 1235,00"
         let inputDiscount: String = "R$ 123,00"
         let calculator = SpyCalculator()
@@ -170,24 +162,15 @@ final class TestHomeViewModel: XCTestCase {
         viewModel.verifyData(salary: inputSalary, discounts: inputDiscount)
         
         XCTAssertTrue(calculator.calculateIRRFIsCalled)
-    }
-    
-    func test_calculateNetSalary_testIfTheNetSalaryObjectIsSetted(){
-        let inputSalary: String = "R$ 1235,00"
-        let inputDiscount: String = "R$ 123,00"
-        let calculator = DummyCalculator()
-        let viewModel = HomeViewModel(calculator: calculator)
-        
-        viewModel.verifyData(salary: inputSalary, discounts: inputDiscount)
-        
         XCTAssertNotNil(viewModel.netSalary)
+
     }
     
     
     func test_sendData_delegateGoToResultIsCalled() {
         let inputSalary: String = "R$ 1235,00"
         let inputDiscount: String = "R$ 123,00"
-        let calculator = DummyCalculator()
+        let calculator = SpyCalculator()
         let delegate = SpyHomeViewModelDelegate()
         let viewModel = HomeViewModel(calculator: calculator)
         viewModel.delegate = delegate
