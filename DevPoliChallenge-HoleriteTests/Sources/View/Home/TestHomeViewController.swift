@@ -13,8 +13,9 @@ import SnapshotTesting
 final class TestHomeViewController: XCTestCase {
     
     func test_HomeViewControllerWithFieldsWithoutTexts(){
-        let vm = SpyHomeViewModel()
+        let vm = DummyHomeViewModel()
         let view = HomeView()
+        
         let vc = HomeViewController(view: view, viewModel: vm)
         
         assertSnapshot(of: vc, as: .image)

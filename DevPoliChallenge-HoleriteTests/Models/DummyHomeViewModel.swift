@@ -9,13 +9,11 @@
 import Foundation
 @testable import DevPoliChallenge_Holerite
 
-final class SpyHomeViewModel: HomeViewModelInput {
+final class DummyHomeViewModel: HomeViewModelInput {
     
     var delegate: DevPoliChallenge_Holerite.HomeViewModelDelegate?
     
-    func verifyData(salary: String?, discounts: String?) {
-        
-    }
+    func verifyData(salary: String?, discounts: String?) {}
     
     
 }

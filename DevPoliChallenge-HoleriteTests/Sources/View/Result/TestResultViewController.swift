@@ -16,6 +16,7 @@ final class TestResultViewController: XCTestCase {
         let vm = DummyResultViewModel()
         let view = ResultView()
         let fakeData = ResultModel(name: "Result", value: 0.0)
+        
         view.setData(salary: fakeData, discounts: fakeData, discountINSS: fakeData, discountIRRF: fakeData, netSalary: fakeData)
         let vc = ResultViewController(resultView: view, viewModel: vm)
         
@@ -26,6 +27,7 @@ final class TestResultViewController: XCTestCase {
         let vm = DummyResultViewModel()
         let view = ResultView()
         let fakeData = ResultModel(name: "Result", value: 1234.56, porcentage: 8.0)
+        
         view.setData(salary: fakeData, discounts: fakeData, discountINSS: fakeData, discountIRRF: fakeData, netSalary: fakeData)
         let vc = ResultViewController(resultView: view, viewModel: vm)
         
